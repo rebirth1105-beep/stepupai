@@ -3,327 +3,375 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 검색 노출 진단 | 나는 어떤 유형의 사업가일까?</title>
+<title>AI 검색 노출 진단 | GEO DIAGNOSIS</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy-deep:#0b1c33;
-    --navy-mid:#122a4a;
-    --navy-line:#24466f;
-    --gold:#c8a24d;
-    --gold-light:#e6d4a0;
-    --cream:#faf8f3;
+    /* ---- Modern Corporate Fintech tokens (BankJobs BD) ---- */
+    --ink:#071533;
+    --ink-soft:#0d2350;
+    --blue:#276EF1;
+    --blue-light:#5B9CFF;
+    --green:#16C784;
+    --surface:#F8FAFD;
     --white:#ffffff;
-    --ink:#1c2430;
-    --muted:#6b7280;
-    --red:#c0483f;
-    --yellow:#d1a13a;
-    --green:#3f8b5c;
+    --border:#DCE4F1;
+    --muted:#61708A;
+    --red:#EF4444;
+    --yellow:#F59E0B;
+    --grad-cta:linear-gradient(to right,#4F54F5,#086CFF);
+    --grad-accent:linear-gradient(to right,#086CFF,#6847EB,#14B878);
+    --shadow-glow:0 18px 45px rgba(39,110,241,0.24);
+    --shadow-soft:0 12px 35px rgba(20,45,90,0.10);
+    --r-lg:24px;
+    --r-md:16px;
+    --r-btn:12px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{height:100%;}
   body{
-    font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
-    background:var(--cream);
+    font-family:'Inter','Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,system-ui,Roboto,sans-serif;
+    background:var(--surface);
     color:var(--ink);
     min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:24px;
     line-height:1.6;
+    position:relative;
   }
-  .serif{font-family:"Noto Serif KR","Georgia","Batang",serif;}
+  .mono{font-family:inherit;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+
+  .brand-mark{
+    position:fixed;top:22px;left:24px;z-index:1000;
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);font-weight:700;
+    pointer-events:none;
+  }
+  .brand-mark span{color:var(--blue);}
 
   .stage{
     width:100%;
-    max-width:640px;
+    max-width:680px;
+    margin:0 auto;
     background:var(--white);
-    border-radius:6px;
-    box-shadow:0 24px 60px rgba(11,28,51,0.12), 0 2px 8px rgba(11,28,51,0.08);
+    position:relative;
+    border:1px solid var(--border);
+    min-height:100vh;
     overflow:hidden;
-    position:relative;
-    border:1px solid #ece6d8;
   }
-  .screen{display:none;}
-  .screen.active{display:block;animation:fadeIn .45s ease;}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+  @media (min-width:760px){
+    body{display:flex;align-items:center;justify-content:center;padding:40px 24px;}
+    .stage{min-height:auto;border-radius:var(--r-lg);box-shadow:var(--shadow-soft);}
+  }
 
-  /* ---------- INTRO ---------- */
+  .screen{display:none;}
+  .screen.active{display:block;animation:fadeIn .5s cubic-bezier(0.16,1,0.3,1);}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+  /* ---------- INTRO (Hero) ---------- */
   .intro{
-    background:linear-gradient(160deg,var(--navy-deep) 0%, var(--navy-mid) 65%, var(--navy-deep) 100%);
-    color:var(--cream);
-    padding:56px 40px 44px;
-    text-align:center;
-    position:relative;
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;position:relative;overflow:hidden;
+    padding:64px 32px 56px;
+    background:
+      radial-gradient(ellipse at top, rgba(39,110,241,0.35) 0%, rgba(7,21,51,0.94) 55%, #071533 100%);
   }
   .eyebrow{
-    letter-spacing:.28em;
+    letter-spacing:.24em;
     font-size:11px;
-    color:var(--gold-light);
+    color:var(--blue-light);
     text-transform:uppercase;
-    margin-bottom:22px;
-    font-weight:600;
+    margin-bottom:26px;
+    font-weight:800;
   }
   .intro h1{
-    font-size:30px;
-    line-height:1.4;
-    margin-bottom:14px;
+    font-size:clamp(2.2rem, 7.6vw, 3.6rem);
+    font-weight:900;
+    line-height:1.28;
+    letter-spacing:-0.02em;
+    margin-bottom:18px;
     color:var(--white);
   }
-  .intro p.desc{
-    color:#c7d2e3;
-    font-size:14.5px;
-    max-width:420px;
-    margin:0 auto 34px;
+  .intro h1 em{
+    font-style:normal;font-weight:900;
+    background:var(--grad-accent);-webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  .gauge-wrap{margin:0 auto 34px;width:150px;height:150px;position:relative;}
+  .intro p.desc{
+    color:rgba(255,255,255,0.68);
+    font-size:15px;font-weight:500;
+    max-width:420px;
+    margin:0 auto 40px;
+  }
+  .gauge-wrap{margin:0 auto 40px;width:150px;height:150px;position:relative;}
   .gauge-wrap svg{width:100%;height:100%;transform:rotate(-90deg);}
   .gauge-bg{fill:none;stroke:rgba(255,255,255,0.12);stroke-width:8;}
-  .gauge-fg{fill:none;stroke:var(--gold);stroke-width:8;stroke-linecap:round;
+  .gauge-fg{fill:none;stroke:var(--blue);stroke-width:8;stroke-linecap:round;
     stroke-dasharray:326.7; stroke-dashoffset:326.7;
-    transition:stroke-dashoffset 1.1s cubic-bezier(.2,.8,.2,1);}
+    filter:drop-shadow(0 0 8px rgba(39,110,241,0.6));
+    transition:stroke-dashoffset 1.1s cubic-bezier(0.16,1,0.3,1);}
   .gauge-label{
     position:absolute;inset:0;display:flex;flex-direction:column;
     align-items:center;justify-content:center;
   }
-  .gauge-label .num{font-size:26px;font-weight:700;color:var(--gold-light);font-family:"Noto Serif KR",serif;}
-  .gauge-label .cap{font-size:10px;letter-spacing:.12em;color:#9fb0c8;margin-top:2px;}
+  .gauge-label .num{font-size:28px;font-weight:900;color:var(--white);}
+  .gauge-label .cap{font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,0.55);margin-top:4px;text-transform:uppercase;font-weight:700;}
 
   .start-btn{
-    background:var(--gold);
-    color:var(--navy-deep);
+    background:var(--grad-cta);
+    color:var(--white);
     border:none;
-    padding:15px 38px;
-    font-size:15px;
-    font-weight:700;
-    border-radius:2px;
+    border-radius:var(--r-btn);
+    padding:16px 42px;
+    font-size:14px;
+    font-weight:800;
     cursor:pointer;
-    letter-spacing:.04em;
-    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    letter-spacing:.02em;
+    box-shadow:var(--shadow-glow);
+    transition:transform .25s cubic-bezier(0.16,1,0.3,1), box-shadow .25s ease;
   }
-  .start-btn:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 10px 22px rgba(200,162,77,0.35);}
-  .meta-line{margin-top:18px;font-size:11.5px;color:#7d8ea8;letter-spacing:.05em;}
+  .start-btn:hover{transform:translateY(-2px);box-shadow:0 22px 55px rgba(39,110,241,0.34);}
+  .meta-line{margin-top:20px;font-size:11.5px;color:rgba(255,255,255,0.5);letter-spacing:.04em;font-weight:600;}
 
   /* ---------- QUIZ ---------- */
-  .quiz{padding:40px 40px 44px;}
-  .progress-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:14px;}
-  .progress-count{font-size:12px;color:var(--muted);letter-spacing:.08em;font-weight:600;white-space:nowrap;}
-  .progress-count b{color:var(--navy-deep);}
+  .quiz{padding:88px 36px 48px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;}
+  .progress-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:14px;}
+  .progress-count{font-size:11.5px;color:var(--muted);font-weight:700;white-space:nowrap;}
+  .progress-count b{color:var(--ink);}
   .progress-track{
-    flex:1;height:2px;background:#eae4d4;position:relative;border-radius:2px;overflow:hidden;
+    flex:1;height:4px;background:var(--border);position:relative;overflow:hidden;border-radius:4px;
   }
   .progress-fill{
-    position:absolute;left:0;top:0;height:100%;background:var(--gold);
-    transition:width .4s ease;
+    position:absolute;left:0;top:0;height:100%;background:var(--grad-cta);border-radius:4px;
+    transition:width .5s cubic-bezier(0.16,1,0.3,1);
   }
   .quiz-nav{
-    margin-top:26px;padding-top:18px;border-top:1px solid #efe9db;
+    margin-top:30px;padding-top:20px;border-top:1px solid var(--border);
     min-height:20px;
   }
   .back-btn{
-    display:flex;align-items:center;gap:7px;
+    display:flex;align-items:center;gap:8px;
     background:none;border:none;cursor:pointer;
-    font-size:13.5px;color:var(--navy-mid);font-weight:600;letter-spacing:.01em;
-    padding:6px 4px;transition:color .2s ease, transform .2s ease;
+    font-size:13.5px;color:var(--ink);font-weight:700;letter-spacing:.01em;
+    padding:6px 4px;transition:color .2s ease, transform .2s cubic-bezier(0.16,1,0.3,1);
   }
-  .back-btn:hover{color:var(--gold);transform:translateX(-2px);}
+  .back-btn:hover{color:var(--blue);transform:translateX(-3px);}
   .back-btn:disabled{opacity:0;pointer-events:none;}
   .back-btn svg{width:14px;height:14px;flex-shrink:0;}
-  .q-section-tag{
-    display:inline-block;font-size:10.5px;letter-spacing:.1em;color:var(--navy-mid);
-    background:#eef1f6;padding:4px 10px;border-radius:20px;margin-bottom:14px;font-weight:700;
+  .skip-consult-link{
+    display:block;margin-top:14px;background:none;border:none;cursor:pointer;
+    font-size:12px;color:var(--blue);font-weight:700;letter-spacing:.01em;
+    padding:6px 4px;transition:color .2s ease;text-align:left;
   }
-  .q-section-tag.channel{color:#8a6a1f;background:#f7efd9;}
-  .q-eyebrow{font-size:11px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:12px;}
-  .q-text{font-size:21px;line-height:1.5;margin-bottom:28px;color:var(--navy-deep);min-height:64px;}
-  .options{display:flex;flex-direction:column;gap:10px;}
-  .option{
-    text-align:left;
-    background:var(--cream);
-    border:1px solid #e7e0cf;
-    border-radius:3px;
-    padding:16px 18px;
-    font-size:14.5px;
-    color:var(--ink);
-    cursor:pointer;
-    transition:border-color .2s ease, background .2s ease, transform .15s ease;
-    position:relative;
-  }
-  .option:hover{border-color:var(--gold);background:#fbf6e9;transform:translateX(2px);}
-  .option:active{transform:translateX(0);}
-  .option.picked{border-color:var(--gold);background:#fbf6e9;}
+  .skip-consult-link:hover{color:#0E5FD1;text-decoration:underline;text-underline-offset:3px;}
+  .skip-consult-link.hidden{display:none;}
 
-  /* ---------- RESULT HERO (공통) ---------- */
-  .result-hero{
-    background:linear-gradient(160deg,var(--navy-deep) 0%, var(--navy-mid) 100%);
-    color:var(--white);
-    padding:48px 40px 34px;
-    text-align:center;
+  /* ---------- CHECKPOINT (Part 1 완료) ---------- */
+  .checkpoint{
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:56px 36px;
   }
-  .result-tag{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-light);margin-bottom:14px;font-weight:700;}
-  .result-title{font-size:26px;margin-bottom:10px;color:var(--white);line-height:1.4;}
-  .result-sub{font-size:13.5px;color:#c7d2e3;max-width:420px;margin:0 auto;}
-  .result-gauge{width:120px;height:120px;margin:26px auto 0;position:relative;}
+  .cp-icon{
+    width:56px;height:56px;border-radius:50%;background:#EAF2FF;border:1px solid #D7E7FF;
+    display:flex;align-items:center;justify-content:center;margin-bottom:22px;
+  }
+  .cp-eyebrow{font-size:11px;letter-spacing:.16em;color:var(--blue);text-transform:uppercase;font-weight:800;margin-bottom:12px;}
+  .cp-title{font-size:22px;font-weight:900;color:var(--ink);margin-bottom:12px;}
+  .cp-desc{font-size:13.5px;font-weight:500;color:var(--muted);max-width:340px;margin:0 auto 30px;line-height:1.7;}
+  .cp-skip{
+    display:block;margin-top:18px;background:none;border:none;cursor:pointer;
+    font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.01em;
+    text-decoration:underline;text-underline-offset:3px;
+  }
+  .cp-skip:hover{color:var(--blue);}
+  .q-section-tag{
+    display:inline-block;font-size:11px;letter-spacing:.08em;color:var(--blue);
+    background:#EAF2FF;border:1px solid #D7E7FF;border-radius:20px;padding:5px 13px;margin-bottom:16px;font-weight:800;
+  }
+  .q-section-tag.channel{color:#0E9E6E;background:#E4FBF2;border-color:#C8F3E1;}
+  .q-text{font-size:clamp(1.25rem,3.4vw,1.55rem);font-weight:800;line-height:1.4;letter-spacing:-0.01em;margin-bottom:32px;color:var(--ink);min-height:64px;}
+  .options{display:flex;flex-direction:column;gap:12px;}
+  .option{
+    text-align:left;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-md);
+    padding:18px 20px;font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;
+    transition:border-color .2s ease, background .2s ease, transform .15s ease, box-shadow .2s ease;
+  }
+  .option:hover{border-color:var(--blue);background:#F5F9FF;transform:translateX(3px);box-shadow:var(--shadow-soft);}
+  .option.picked{border-color:var(--blue);background:#EAF2FF;color:var(--ink);}
+
+  /* ---------- RESULT HERO ---------- */
+  .result-hero{
+    padding:64px 36px 40px;text-align:center;
+    background:radial-gradient(ellipse at top, rgba(39,110,241,0.32) 0%, rgba(7,21,51,0.95) 55%, #071533 100%);
+    color:var(--white);
+  }
+  .result-tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-light);margin-bottom:16px;font-weight:800;}
+  .result-title{font-size:clamp(1.5rem,4.4vw,2.1rem);font-weight:900;margin-bottom:12px;color:var(--white);line-height:1.4;letter-spacing:-0.01em;}
+  .result-sub{font-size:13.5px;font-weight:500;color:rgba(255,255,255,0.68);max-width:420px;margin:0 auto;}
+  .result-gauge{width:120px;height:120px;margin:28px auto 0;position:relative;}
   .result-gauge svg{width:100%;height:100%;transform:rotate(-90deg);}
 
   .signal-block{
-    margin-top:30px;padding-top:26px;border-top:1px solid rgba(255,255,255,0.12);
+    margin-top:32px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.14);
   }
-  .signal-caption{font-size:11px;letter-spacing:.14em;color:#9fb0c8;text-transform:uppercase;margin-bottom:14px;}
-  .signal-lights{display:flex;justify-content:center;gap:16px;margin-bottom:14px;}
+  .signal-caption{font-size:11px;letter-spacing:.12em;color:rgba(255,255,255,0.5);text-transform:uppercase;margin-bottom:16px;font-weight:700;}
+  .signal-lights{display:flex;justify-content:center;gap:18px;margin-bottom:16px;}
   .light{
-    width:34px;height:34px;border-radius:50%;
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(255,255,255,0.1);
+    width:32px;height:32px;border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.16);
     position:relative;
-    transition:all .3s ease;
+    transition:all .4s cubic-bezier(0.16,1,0.3,1);
   }
-  .light.on-red{background:var(--red);box-shadow:0 0 22px rgba(192,72,63,0.75);border-color:var(--red);}
-  .light.on-yellow{background:var(--yellow);box-shadow:0 0 22px rgba(209,161,58,0.75);border-color:var(--yellow);}
-  .light.on-green{background:var(--green);box-shadow:0 0 22px rgba(63,139,92,0.75);border-color:var(--green);}
-  .signal-verdict{font-size:15px;font-weight:700;color:var(--white);font-family:"Noto Serif KR",serif;}
-  .signal-desc{font-size:12.5px;color:#c7d2e3;margin-top:6px;max-width:380px;margin-left:auto;margin-right:auto;}
+  .light.on-red{background:var(--red);box-shadow:0 0 24px rgba(239,68,68,0.7);border-color:var(--red);}
+  .light.on-yellow{background:var(--yellow);box-shadow:0 0 24px rgba(245,158,11,0.65);border-color:var(--yellow);}
+  .light.on-green{background:var(--green);box-shadow:0 0 24px rgba(22,199,132,0.65);border-color:var(--green);}
+  .signal-verdict{font-size:16px;font-weight:800;color:var(--white);}
+  .signal-desc{font-size:12.5px;font-weight:500;color:rgba(255,255,255,0.62);margin-top:8px;max-width:380px;margin-left:auto;margin-right:auto;}
   .urgency-line{
-    margin-top:16px;font-size:12.5px;color:var(--gold-light);font-weight:700;
-    background:rgba(200,162,77,0.1);border:1px solid rgba(200,162,77,0.3);
-    padding:9px 14px;border-radius:3px;display:inline-block;
+    margin-top:18px;font-size:11.5px;color:var(--white);font-weight:800;
+    background:rgba(39,110,241,0.18);border:1px solid rgba(39,110,241,0.4);border-radius:20px;
+    padding:10px 16px;display:inline-block;letter-spacing:.01em;
   }
 
   /* ---------- 잠금 미리보기 + 리드폼 (teaser 화면) ---------- */
-  .teaser-body{padding:34px 40px 40px;}
+  .teaser-body{padding:40px 36px 56px;background:var(--white);}
   .lock-preview{
-    position:relative;background:var(--cream);border:1px solid #ece6d8;border-radius:4px;
-    padding:18px 20px;margin-bottom:26px;overflow:hidden;
+    position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);
+    padding:20px 22px;margin-bottom:30px;overflow:hidden;
   }
-  .lock-preview .lp-label{font-size:11px;letter-spacing:.1em;color:var(--gold);font-weight:700;margin-bottom:8px;text-transform:uppercase;}
-  .lock-preview .lp-text{font-size:13.5px;color:#4b5262;filter:blur(3.5px);user-select:none;}
+  .lock-preview .lp-label{font-size:10.5px;letter-spacing:.1em;color:var(--blue);font-weight:800;margin-bottom:10px;text-transform:uppercase;}
+  .lock-preview .lp-text{font-size:13.5px;font-weight:500;color:var(--muted);filter:blur(3.5px);user-select:none;}
   .lock-preview .lp-more{
     position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;
-    background:linear-gradient(to bottom, rgba(250,248,243,0) 0%, rgba(250,248,243,0.96) 65%);
-    padding-bottom:12px;
+    background:linear-gradient(to bottom, rgba(248,250,253,0) 0%, rgba(248,250,253,0.97) 65%);
+    padding-bottom:14px;
   }
-  .lp-more span{font-size:11.5px;color:var(--navy-deep);font-weight:700;background:var(--white);
-    border:1px solid #e2dbc8;padding:5px 12px;border-radius:20px;}
+  .lp-more span{font-size:11.5px;color:var(--ink);font-weight:800;background:var(--white);
+    border:1px solid var(--border);padding:6px 14px;border-radius:20px;letter-spacing:.01em;}
 
-  .form-title{font-size:16px;color:var(--navy-deep);margin-bottom:6px;font-family:"Noto Serif KR",serif;}
-  .form-desc{font-size:12.5px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
-  .lead-form{display:flex;flex-direction:column;gap:12px;}
+  .form-title{font-size:18px;font-weight:800;color:var(--ink);margin-bottom:8px;}
+  .form-desc{font-size:12.5px;font-weight:500;color:var(--muted);margin-bottom:24px;line-height:1.7;}
+  .lead-form{display:flex;flex-direction:column;gap:16px;}
   .lead-form input{
-    width:100%;padding:13px 14px;border:1px solid #ddd6c4;border-radius:3px;
-    font-size:14px;font-family:inherit;background:var(--white);color:var(--ink);
-    transition:border-color .2s ease;
+    width:100%;padding:14px 16px;border:1.5px solid var(--border);border-radius:var(--r-btn);
+    font-size:14px;font-family:inherit;font-weight:600;background:var(--surface);color:var(--ink);
+    transition:border-color .25s ease, background .25s ease;
   }
-  .lead-form input:focus{outline:none;border-color:var(--gold);}
-  .lead-form label{font-size:11.5px;color:var(--muted);margin-bottom:2px;display:block;}
+  .lead-form input::placeholder{color:#A7B2C6;font-weight:500;}
+  .lead-form input:focus{outline:none;border-color:var(--blue);background:var(--white);}
+  .lead-form label{font-size:11px;color:var(--muted);margin-bottom:6px;display:block;letter-spacing:.02em;font-weight:700;}
   .form-submit{
-    margin-top:6px;background:var(--navy-deep);color:var(--white);border:none;
-    padding:15px 20px;border-radius:2px;font-size:14.5px;font-weight:700;cursor:pointer;
-    letter-spacing:.02em;transition:background .2s ease;
+    margin-top:10px;background:var(--grad-cta);color:var(--white);border:none;border-radius:var(--r-btn);
+    padding:16px 20px;font-size:14px;font-weight:800;cursor:pointer;
+    letter-spacing:.01em;box-shadow:var(--shadow-glow);transition:transform .25s cubic-bezier(0.16,1,0.3,1), box-shadow .25s ease;
   }
-  .form-submit:hover{background:var(--navy-mid);}
-  .form-privacy{font-size:10.5px;color:#9aa2ae;margin-top:10px;text-align:center;}
+  .form-submit:hover{transform:translateY(-2px);}
+  .form-privacy{font-size:10.5px;color:#A7B2C6;margin-top:14px;text-align:center;font-weight:500;}
 
   /* ---------- 전체 리포트 화면 ---------- */
   .full-recap{
-    background:var(--navy-deep);color:var(--cream);padding:22px 40px;
+    background:var(--ink);color:var(--white);padding:26px 36px;
     display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
   }
-  .full-recap .fr-left{font-size:13.5px;}
-  .full-recap .fr-left b{color:var(--gold-light);}
-  .full-recap .fr-badge{font-size:11px;padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.25);color:#c7d2e3;}
+  .full-recap .fr-left{font-size:14px;font-weight:600;color:rgba(255,255,255,0.75);}
+  .full-recap .fr-left b{color:var(--white);font-weight:800;}
+  .full-recap .fr-badge{font-size:10.5px;padding:7px 13px;border-radius:20px;background:rgba(39,110,241,0.22);border:1px solid rgba(39,110,241,0.4);color:var(--blue-light);letter-spacing:.04em;font-weight:800;}
 
-  .result-body{padding:34px 40px 12px;}
+  .result-body{padding:40px 36px 12px;background:var(--white);}
   .result-body h3{
-    font-size:14px;color:var(--navy-deep);letter-spacing:.02em;margin-bottom:14px;
-    display:flex;align-items:center;gap:8px;
+    font-size:13px;color:var(--ink);letter-spacing:.02em;margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;font-weight:800;
   }
-  .result-body h3::before{content:"";width:16px;height:1px;background:var(--gold);display:inline-block;}
+  .result-body h3::before{content:"";width:18px;height:3px;border-radius:2px;background:var(--grad-cta);display:inline-block;}
   .reasons{list-style:none;margin-bottom:8px;}
   .reasons li{
-    padding:14px 0;border-bottom:1px solid #efe9db;
-    font-size:14px;color:#3a4150;display:flex;gap:12px;
+    padding:16px 0;border-bottom:1px solid var(--border);
+    font-size:14px;font-weight:500;color:#39435A;display:flex;gap:14px;
   }
   .reasons li:last-child{border-bottom:none;}
-  .reasons li .mark{color:var(--gold);font-weight:700;flex-shrink:0;font-family:"Noto Serif KR",serif;}
+  .reasons li .mark{color:var(--blue);font-weight:900;flex-shrink:0;}
 
   /* --- 채널별 진단 (퀴즈 응답 기반, 읽기전용) --- */
-  .channel-block{padding:30px 40px 8px;border-top:6px solid var(--cream);background:#fcfbf7;}
+  .channel-block{padding:36px 36px 8px;border-top:1px solid var(--border);background:var(--surface);}
   .channel-block h3{
-    font-size:14px;color:var(--navy-deep);letter-spacing:.02em;margin-bottom:4px;
-    display:flex;align-items:center;gap:8px;
+    font-size:13px;color:var(--ink);letter-spacing:.02em;margin-bottom:6px;
+    display:flex;align-items:center;gap:10px;font-weight:800;
   }
-  .channel-block h3::before{content:"";width:16px;height:1px;background:var(--gold);display:inline-block;}
-  .channel-intro{font-size:12.5px;color:var(--muted);margin-bottom:24px;line-height:1.6;}
-  .channel-row{margin-bottom:18px;}
-  .channel-row-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-  .channel-name{font-size:14px;font-weight:700;color:var(--ink);}
+  .channel-block h3::before{content:"";width:18px;height:3px;border-radius:2px;background:var(--grad-cta);display:inline-block;}
+  .channel-intro{font-size:12.5px;font-weight:500;color:var(--muted);margin-bottom:28px;line-height:1.7;}
+  .channel-row{margin-bottom:22px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);padding:16px 18px;}
+  .channel-row-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .channel-name{font-size:13.5px;font-weight:800;color:var(--ink);letter-spacing:.01em;}
   .channel-level-badge{
-    font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;color:#fff;
+    font-size:10.5px;font-weight:800;padding:4px 12px;color:var(--white);border-radius:20px;
+    letter-spacing:.02em;
   }
-  .channel-bar-track{height:6px;background:#ece6d8;border-radius:4px;overflow:hidden;}
-  .channel-bar-fill{height:100%;width:0%;background:#d8d2c0;transition:width .5s ease .1s, background .5s ease .1s;}
+  .channel-bar-track{height:6px;background:var(--border);overflow:hidden;border-radius:6px;}
+  .channel-bar-fill{height:100%;width:0%;background:var(--muted);border-radius:6px;transition:width .6s cubic-bezier(0.16,1,0.3,1) .1s, background .6s ease .1s;}
   .channel-summary{
-    margin-top:20px;margin-bottom:24px;padding:14px 16px;background:var(--white);border:1px solid #ece6d8;border-radius:4px;
-    font-size:12.5px;color:var(--muted);
+    margin-top:22px;margin-bottom:14px;padding:16px 18px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);
+    font-size:12.5px;font-weight:500;color:var(--muted);
   }
-  .channel-summary b{color:var(--navy-deep);}
+  .channel-summary b{color:var(--ink);font-weight:800;}
   .trust-footnote{
-    font-size:11px;color:#9aa2ae;text-align:center;margin:22px 0 26px;letter-spacing:.01em;
+    font-size:10.5px;color:#A7B2C6;text-align:center;margin:24px 0 30px;letter-spacing:.01em;font-weight:500;
   }
-  .trust-footnote b{color:var(--navy-mid);font-weight:700;}
+  .trust-footnote b{color:var(--muted);font-weight:800;}
 
   /* ---------- 이원화 CTA ---------- */
-  .cta-block{padding:32px 40px 40px;background:var(--cream);}
-  .cta-block-title{font-size:15px;color:var(--navy-deep);font-family:"Noto Serif KR",serif;margin-bottom:4px;text-align:center;}
-  .cta-block-sub{font-size:12px;color:var(--muted);text-align:center;margin-bottom:22px;}
-  .cta-cards{display:flex;gap:14px;}
+  .cta-block{padding:40px 36px 56px;background:var(--white);}
+  .cta-block-title{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:6px;text-align:center;}
+  .cta-block-sub{font-size:12px;font-weight:500;color:var(--muted);text-align:center;margin-bottom:28px;}
+  .cta-cards{display:flex;gap:16px;}
   .cta-card{
-    flex:1;background:var(--white);border:1px solid #e2dbc8;border-radius:4px;
-    padding:22px 18px;text-align:left;position:relative;display:flex;flex-direction:column;
+    flex:1;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-md);
+    padding:26px 20px;text-align:left;position:relative;display:flex;flex-direction:column;
   }
-  .cta-card.premium{border-color:var(--gold);box-shadow:0 10px 26px rgba(200,162,77,0.18);}
+  .cta-card.premium{border-color:var(--blue);box-shadow:var(--shadow-glow);}
   .cta-badge{
-    position:absolute;top:-11px;right:16px;background:var(--gold);color:var(--navy-deep);
-    font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.03em;
+    position:absolute;top:-11px;right:16px;background:var(--grad-cta);color:var(--white);border-radius:20px;
+    font-size:10px;font-weight:800;padding:5px 12px;letter-spacing:.03em;
   }
-  .cta-card .ct-name{font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
-  .cta-card .ct-title{font-size:16px;font-weight:700;color:var(--navy-deep);margin-bottom:8px;font-family:"Noto Serif KR",serif;}
-  .cta-card .ct-desc{font-size:12.5px;color:#5b6270;margin-bottom:10px;line-height:1.6;}
+  .cta-card .ct-name{font-size:10.5px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:10px;font-weight:800;}
+  .cta-card .ct-title{font-size:17px;font-weight:900;color:var(--ink);margin-bottom:10px;}
+  .cta-card .ct-desc{font-size:12.5px;font-weight:500;color:#5B6478;margin-bottom:12px;line-height:1.7;}
   .cta-card .ct-edge{
-    font-size:11.5px;color:#8a6a1f;background:#f7efd9;border:1px solid #ecdcae;
-    border-radius:3px;padding:8px 10px;margin-bottom:16px;line-height:1.5;flex:1;
+    font-size:11.5px;font-weight:500;color:#0E5FD1;background:#EAF2FF;border:1px solid #D7E7FF;border-radius:var(--r-btn);
+    padding:10px 12px;margin-bottom:18px;line-height:1.6;flex:1;
   }
   .cta-card button{
-    border:none;padding:13px 16px;border-radius:2px;font-size:13.5px;font-weight:700;cursor:pointer;
-    letter-spacing:.02em;transition:opacity .2s ease;
+    border:none;border-radius:var(--r-btn);padding:14px 16px;font-size:13.5px;font-weight:800;cursor:pointer;
+    letter-spacing:.01em;transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
   }
-  .cta-card button:hover{opacity:.88;}
-  .cta-card.free button{background:transparent;border:1px solid var(--navy-deep);color:var(--navy-deep);}
-  .cta-card.premium button{background:var(--navy-deep);color:var(--white);}
-  .restart-line{text-align:center;margin-top:22px;}
+  .cta-card.free button{background:var(--surface);color:var(--ink);border:1.5px solid var(--border);}
+  .cta-card.free button:hover{border-color:var(--blue);color:var(--blue);}
+  .cta-card.premium button{background:var(--grad-cta);color:var(--white);box-shadow:var(--shadow-glow);}
+  .cta-card.premium button:hover{transform:translateY(-2px);}
+  .restart-line{text-align:center;margin-top:26px;}
   .restart-line button{
-    background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline;
+    background:none;border:none;color:var(--muted);font-size:11.5px;cursor:pointer;font-weight:600;
+    text-decoration:underline;text-underline-offset:3px;letter-spacing:.01em;
   }
-  .restart-line button:hover{color:var(--navy-deep);}
+  .restart-line button:hover{color:var(--blue);}
 
   @media (max-width:480px){
-    .intro{padding:44px 24px 36px;}
-    .quiz{padding:30px 22px 34px;}
-    .result-hero{padding:38px 22px 30px;}
-    .teaser-body{padding:26px 22px 32px;}
-    .full-recap{padding:16px 22px;}
-    .result-body{padding:26px 22px 12px;}
-    .channel-block{padding:26px 22px 8px;}
-    .cta-block{padding:26px 22px 32px;}
+    .intro{padding:56px 24px 44px;}
+    .quiz{padding:72px 24px 40px;}
+    .result-hero{padding:56px 24px 34px;}
+    .teaser-body{padding:32px 24px 40px;}
+    .full-recap{padding:20px 24px;}
+    .result-body{padding:32px 24px 12px;}
+    .channel-block{padding:30px 24px 8px;}
+    .cta-block{padding:32px 24px 44px;}
     .cta-cards{flex-direction:column;}
-    .q-text{font-size:18px;}
   }
 </style>
 </head>
 <body>
+<div class="brand-mark">GEO <span>/</span> DIAGNOSIS</div>
 
 <div class="stage" id="stage">
-
   <!-- ============ INTRO ============ -->
   <section class="screen active" id="screen-intro">
     <div class="intro">
@@ -338,10 +386,10 @@
           <div class="cap">AI 노출 지수</div>
         </div>
       </div>
-      <h1 class="serif">AI 검색에서<br>내 사업은 몇 등급일까?</h1>
-      <p class="desc">ChatGPT, Gemini 같은 AI 검색이 당신의 사업을 얼마나 알아보는지,<br>11개의 질문으로 지금 상태와 채널별 준비도를 함께 진단해드립니다.</p>
+      <h1>AI 검색에서<br>내 사업은 <em>몇 등급</em>일까?</h1>
+      <p class="desc">ChatGPT, Gemini 같은 AI 검색이 당신의 사업을 얼마나 알아보는지,<br>20개의 질문으로 지금 상태와 채널별 준비도를 함께 진단해드립니다.</p>
       <button class="start-btn" onclick="startQuiz()">진단 시작하기</button>
-      <div class="meta-line">약 1~2분 소요 · 결과에 따른 맞춤 전략 안내</div>
+      <div class="meta-line mono">약 2~3분 소요 · 결과에 따른 맞춤 전략 안내</div>
     </div>
   </section>
 
@@ -350,17 +398,34 @@
     <div class="quiz">
       <div class="progress-row">
         <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-        <div class="progress-count"><b id="qNow">1</b> / <span id="qTotal">11</span></div>
+        <div class="progress-count mono"><b id="qNow">1</b> / <span id="qTotal">9</span></div>
       </div>
-      <div class="q-section-tag" id="qSectionTag">사업 진단</div>
-      <div class="q-text serif" id="qText">질문 로딩 중...</div>
+      <div class="q-section-tag" id="qSectionTag">PART 1 · 사업 진단</div>
+      <div class="q-text" id="qText">질문 로딩 중...</div>
       <div class="options" id="qOptions"></div>
       <div class="quiz-nav">
         <button type="button" class="back-btn" id="backBtn" onclick="goBack()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
           이전 질문으로
         </button>
+        <button type="button" class="skip-consult-link hidden" id="skipConsultBtn" onclick="goToConsultMidway()">
+          진단 결과를 기다리지 않고 바로 상담받고 싶다면 →
+        </button>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ CHECKPOINT (Part 1 완료 화면) ============ -->
+  <section class="screen" id="screen-checkpoint">
+    <div class="checkpoint">
+      <div class="cp-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#276EF1" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <div class="cp-eyebrow">PART 1 완료</div>
+      <h2 class="cp-title">사업 진단이 끝났어요</h2>
+      <p class="cp-desc">이제 6가지 채널의 준비도만 빠르게 점검하면 진단표가 완성돼요. 약 1분이면 충분해요.</p>
+      <button type="button" class="start-btn" onclick="continueFromCheckpoint()">채널 점검 시작하기 →</button>
+      <button type="button" class="cp-skip" onclick="goToConsultMidway()">채널 점검 결과를 기다리지 않고 바로 상담받고 싶다면 →</button>
     </div>
   </section>
 
@@ -368,7 +433,7 @@
   <section class="screen" id="screen-result-teaser">
     <div class="result-hero">
       <div class="result-tag" id="teaserTag">RESULT TYPE</div>
-      <h2 class="result-title serif" id="teaserTitle">결과 제목</h2>
+      <h2 class="result-title" id="teaserTitle">결과 제목</h2>
       <p class="result-sub" id="teaserSub">결과 한 줄 설명</p>
       <div class="result-gauge">
         <svg viewBox="0 0 120 120">
@@ -382,13 +447,13 @@
       </div>
 
       <div class="signal-block">
-        <div class="signal-caption">AI 시대 준비도 신호등</div>
+        <div class="signal-caption mono">AI 시대 준비도 신호등</div>
         <div class="signal-lights">
           <div class="light" id="lightRed"></div>
           <div class="light" id="lightYellow"></div>
           <div class="light" id="lightGreen"></div>
         </div>
-        <div class="signal-verdict serif" id="signalVerdict">진단 중...</div>
+        <div class="signal-verdict" id="signalVerdict">진단 중...</div>
         <div class="signal-desc" id="signalDesc"></div>
         <div class="urgency-line" id="urgencyLine"></div>
       </div>
@@ -397,7 +462,7 @@
     <div class="teaser-body">
       <div class="lock-preview">
         <div class="lp-label">진단표 미리보기</div>
-        <div class="lp-text" id="lockPreviewText">이 결과가 나온 이유와 채널별(PR·SNS·플랫폼·리뷰) 준비도 분석, 지금 바로 시작해야 할 우선순위까지 확인할 수 있어요.</div>
+        <div class="lp-text" id="lockPreviewText">이 결과가 나온 이유와 6가지 채널의 준비도 분석, 지금 바로 시작해야 할 우선순위까지 확인할 수 있어요.</div>
         <div class="lp-more"><span>🔒 전체 진단표는 아래 정보를 입력하면 확인할 수 있어요</span></div>
       </div>
 
@@ -426,7 +491,7 @@
   <section class="screen" id="screen-result-full">
     <div class="full-recap">
       <div class="fr-left"><b id="recapName">고객</b>님을 위한 AI 검색 진단표</div>
-      <div class="fr-badge" id="recapBadge">TYPE</div>
+      <div class="fr-badge mono" id="recapBadge">TYPE</div>
     </div>
 
     <div class="result-body">
@@ -436,7 +501,7 @@
 
     <div class="channel-block">
       <h3>채널별 AI 검색 준비도</h3>
-      <p class="channel-intro">답변하신 내용을 바탕으로 4가지 채널의 준비도를 분석했어요. AI는 이 네 곳의 정보를 종합해 당신을 검색 결과에 인용할지 판단합니다.</p>
+      <p class="channel-intro">답변하신 내용을 바탕으로 6가지 채널의 준비도를 분석했어요. AI는 이 여섯 곳의 정보를 종합해 당신을 검색 결과에 인용할지 판단합니다.</p>
 
       <div class="channel-row" data-key="pr">
         <div class="channel-row-top">
@@ -470,19 +535,35 @@
         <div class="channel-bar-track"><div class="channel-bar-fill" id="bar-review"></div></div>
       </div>
 
+      <div class="channel-row" data-key="wiki">
+        <div class="channel-row-top">
+          <span class="channel-name">공개 정보 등재</span>
+          <span class="channel-level-badge" id="badge-wiki"></span>
+        </div>
+        <div class="channel-bar-track"><div class="channel-bar-fill" id="bar-wiki"></div></div>
+      </div>
+
+      <div class="channel-row" data-key="schema">
+        <div class="channel-row-top">
+          <span class="channel-name">웹사이트 정보 구조</span>
+          <span class="channel-level-badge" id="badge-schema"></span>
+        </div>
+        <div class="channel-bar-track"><div class="channel-bar-fill" id="bar-schema"></div></div>
+      </div>
+
       <div class="channel-summary" id="channelSummary"></div>
       <div class="trust-footnote">이 진단표는 GEO 전문 대행사 · 언론사 <b>대한청년일보</b> 운영진이 함께 설계했습니다.</div>
     </div>
 
     <div class="cta-block">
-      <div class="cta-block-title serif">다음 단계를 선택해주세요</div>
+      <div class="cta-block-title">다음 단계를 선택해주세요</div>
       <div class="cta-block-sub">진단표만으로는 실행 전략까지 알기 어려워요. 상황에 맞는 다음 단계를 골라보세요.</div>
       <div class="cta-cards">
         <div class="cta-card free">
           <div class="ct-name">FREE</div>
           <div class="ct-title">무료 상담 신청</div>
           <div class="ct-desc">진단표를 바탕으로 전문가와 15분간 현재 상태와 우선순위를 간단히 짚어드려요.</div>
-          <button onclick="alert('무료 상담 신청 폼으로 연결하도록 이 버튼에 링크를 걸어주세요.')">무료 상담 신청하기</button>
+          <button onclick="goToConsult('free')">무료 상담 신청하기</button>
         </div>
         <div class="cta-card premium">
           <div class="cta-badge">추천</div>
@@ -490,7 +571,7 @@
           <div class="ct-title">정밀 진단 + 컨설팅</div>
           <div class="ct-desc" id="premiumDesc">채널별 데이터를 정밀 분석하고, 우리 사업에 맞는 GEO 실행 전략과 대행 플랜까지 제안해드려요.</div>
           <div class="ct-edge" id="premiumEdge"></div>
-          <button onclick="alert('유료 정밀진단+컨설팅 신청 폼으로 연결하도록 이 버튼에 링크를 걸어주세요.')">정밀진단 신청하기</button>
+          <button onclick="goToConsult('premium')">정밀진단 신청하기</button>
         </div>
       </div>
       <div class="restart-line"><button onclick="restartQuiz()">처음부터 다시 진단하기</button></div>
@@ -500,6 +581,7 @@
 </div>
 
 <script>
+
 /* ---------------------------------------------------------
    데이터 정의
    kind:'type'  -> 결과 유형(A/B/C) 판정용 질문, option.value = 'A'|'B'|'C'
@@ -507,7 +589,7 @@
 --------------------------------------------------------- */
 const QUESTIONS = [
   {
-    kind:'type', section:'사업 진단',
+    kind:'type', section:'노출 시급도',
     text: "지금 당신의 사업은 어떤 상태인가요?",
     options: [
       { t:"이미 자리를 잡았고 매출도 꾸준하지만, 온라인에서는 잘 안 보여요", value:"A" },
@@ -516,7 +598,7 @@ const QUESTIONS = [
     ]
   },
   {
-    kind:'type', section:'사업 진단',
+    kind:'type', section:'노출 시급도',
     text: "요즘 새로운 고객은 주로 어떻게 당신을 알게 되나요?",
     options: [
       { t:"기존 고객 소개나 오프라인 인맥이 대부분이에요", value:"A" },
@@ -525,7 +607,7 @@ const QUESTIONS = [
     ]
   },
   {
-    kind:'type', section:'사업 진단',
+    kind:'type', section:'노출 시급도',
     text: "ChatGPT나 Gemini 같은 AI에게 당신의 업종을 물어보면?",
     options: [
       { t:"경쟁사는 나오는데, 내 사업은 안 나와요", value:"A" },
@@ -534,7 +616,7 @@ const QUESTIONS = [
     ]
   },
   {
-    kind:'type', section:'사업 진단',
+    kind:'type', section:'브랜드 신뢰 신호',
     text: "블로그·SNS·영상 같은 콘텐츠는 얼마나 쌓여있나요?",
     options: [
       { t:"꽤 있지만 오래됐거나 정리가 안 되어 있어요", value:"A" },
@@ -543,7 +625,7 @@ const QUESTIONS = [
     ]
   },
   {
-    kind:'type', section:'사업 진단',
+    kind:'type', section:'브랜드 신뢰 신호',
     text: "경쟁사와 비교했을 때 가장 아쉬운 점은?",
     options: [
       { t:"실력은 안 밀리는데, 노출에서 밀려요", value:"A" },
@@ -552,7 +634,16 @@ const QUESTIONS = [
     ]
   },
   {
-    kind:'type', section:'사업 진단',
+    kind:'type', section:'브랜드 신뢰 신호',
+    text: "회사·서비스를 소개할 때 주로 어떤 표현을 쓰시나요?",
+    options: [
+      { t:"'빠르고 친절한', '믿을 수 있는' 같은 일반적인 표현을 써요", value:"A" },
+      { t:"상황에 따라 다르게 소개해서 통일된 표현이 딱히 없어요", value:"B" },
+      { t:"아직 소개 문구 자체를 구체적으로 정리해본 적이 없어요", value:"C" },
+    ]
+  },
+  {
+    kind:'type', section:'지속 투자 여력',
     text: "GEO(생성형 AI 검색 최적화)를 시작한다면 가장 기대하는 결과는?",
     options: [
       { t:"지금 당장 AI 검색 결과에 내 사업이 뜨는 것", value:"A" },
@@ -561,12 +652,21 @@ const QUESTIONS = [
     ]
   },
   {
-    kind:'type', section:'사업 진단',
-    text: "마케팅에 꾸준히 쓸 수 있는 시간은 어느 정도인가요?",
+    kind:'type', section:'지속 투자 여력',
+    text: "새로운 전략을 최소 3개월 이상 꾸준히 실행할 여유(시간·예산)가 있으신가요?",
     options: [
       { t:"거의 없어요, 빠른 결과가 중요해요", value:"A" },
       { t:"어느 정도 있고, 꾸준히 관리할 여유가 있어요", value:"B" },
-      { t:"시간은 있는데 무엇부터 해야 할지 모르겠어요", value:"C" },
+      { t:"여유는 있는데 무엇부터 시작해야 할지 모르겠어요", value:"C" },
+    ]
+  },
+  {
+    kind:'type', section:'지속 투자 여력',
+    text: "웹사이트, SNS, 블로그 등에서 회사 소개 문구는 어느 정도 통일되어 있나요?",
+    options: [
+      { t:"채널마다 조금씩 다르게 쓰고 있고, 딱히 신경 쓰지 못했어요", value:"A" },
+      { t:"대체로 비슷하지만 세부 표현은 채널마다 조금씩 달라요", value:"B" },
+      { t:"온라인 채널 자체가 아직 많지 않아 비교할 것도 없어요", value:"C" },
     ]
   },
   {
@@ -579,12 +679,30 @@ const QUESTIONS = [
     ]
   },
   {
+    kind:'channel', channelKey:'pr', section:'채널 점검 · PR/미디어',
+    text: "AI나 검색에서 귀사가 언급될 때, 어떤 느낌으로 나오는 경우가 많나요?",
+    options: [
+      { t:"잘 모르겠어요, 확인해본 적이 없어요", value:1 },
+      { t:"단순히 이름만 나열되는 정도예요", value:2 },
+      { t:"추천하거나 긍정적인 맥락으로 언급돼요", value:3 },
+    ]
+  },
+  {
     kind:'channel', channelKey:'sns', section:'채널 점검 · 소셜미디어',
     text: "블로그, 인스타그램, 스레드 등 소셜미디어는 어떻게 운영하고 있나요?",
     options: [
       { t:"계정만 있고 거의 운영하지 않아요", value:1 },
       { t:"1~2개 채널을 가끔 운영해요", value:2 },
       { t:"여러 채널을 꾸준하고 체계적으로 운영해요", value:3 },
+    ]
+  },
+  {
+    kind:'channel', channelKey:'sns', section:'채널 점검 · 소셜미디어',
+    text: "최근 3개월 안에 소셜미디어 채널을 업데이트한 적이 있나요?",
+    options: [
+      { t:"3개월 넘게 손을 못 댔어요", value:1 },
+      { t:"가끔 생각날 때 올려요", value:2 },
+      { t:"정기적인 주기로 꾸준히 올려요", value:3 },
     ]
   },
   {
@@ -597,12 +715,57 @@ const QUESTIONS = [
     ]
   },
   {
+    kind:'channel', channelKey:'community', section:'채널 점검 · 커뮤니티/플랫폼',
+    text: "고객과의 소통은 주로 어디서 이루어지나요?",
+    options: [
+      { t:"카카오톡·문자 등 비공개 채널 위주예요", value:1 },
+      { t:"비공개와 공개 채널을 섞어서 사용해요", value:2 },
+      { t:"홈페이지·블로그 등 누구나 볼 수 있는 공개 채널 위주예요", value:3 },
+    ]
+  },
+  {
     kind:'channel', channelKey:'review', section:'채널 점검 · 리뷰',
     text: "고객 리뷰는 얼마나 쌓여있고, 어떻게 관리하고 있나요?",
     options: [
       { t:"리뷰가 거의 없거나 신경 쓰지 못하고 있어요", value:1 },
       { t:"어느 정도 있지만 답글 등 관리는 부족해요", value:2 },
       { t:"리뷰가 많고, 답글까지 꾸준히 관리하고 있어요", value:3 },
+    ]
+  },
+  {
+    kind:'channel', channelKey:'review', section:'채널 점검 · 리뷰',
+    text: "좋은 후기나 성공 사례를 콘텐츠로 따로 정리해두셨나요?",
+    options: [
+      { t:"따로 정리해둔 게 없어요", value:1 },
+      { t:"몇 개 정도만 캡처해뒀어요", value:2 },
+      { t:"사례집이나 후기 페이지로 정리해뒀어요", value:3 },
+    ]
+  },
+  {
+    kind:'channel', channelKey:'wiki', section:'채널 점검 · 공개 정보 등재',
+    text: "위키백과, 나무위키 등 오픈 백과사전에 회사·브랜드 정보가 등록되어 있나요?",
+    options: [
+      { t:"등록되어 있지 않아요", value:1 },
+      { t:"등록은 됐지만 오래됐거나 부정확해요", value:2 },
+      { t:"등록되어 있고 최신 정보로 관리되고 있어요", value:3 },
+    ]
+  },
+  {
+    kind:'channel', channelKey:'wiki', section:'채널 점검 · 공개 정보 등재',
+    text: "대표자명, 설립일, 서비스 설명 같은 기본 정보가 여러 사이트(홈페이지·포털·SNS 등)에서 서로 일치하나요?",
+    options: [
+      { t:"확인해본 적이 없어요", value:1 },
+      { t:"대체로 비슷하지만 다른 부분도 있어요", value:2 },
+      { t:"어디서든 정확히 똑같아요", value:3 },
+    ]
+  },
+  {
+    kind:'channel', channelKey:'schema', section:'채널 점검 · 웹사이트 정보 구조',
+    text: "웹사이트에 검색엔진이나 AI가 내용을 더 쉽게 이해하도록 돕는 구조화된 정보(메타데이터 등)를 넣어보신 적 있나요?",
+    options: [
+      { t:"전혀 모르고, 신경 써본 적도 없어요", value:1 },
+      { t:"들어는 봤지만 실제로 적용은 안 했어요", value:2 },
+      { t:"이미 적용했거나, 전문가에게 맡겨 진행 중이에요", value:3 },
     ]
   },
 ];
@@ -661,13 +824,15 @@ const RESULTS = {
 let current = 0;
 let answers = []; // 각 질문에서 선택한 값 기록 (뒤로가기용)
 const scores = { A:0, B:0, C:0 };
-const channelState = {}; // { pr:1~3, sns:1~3, community:1~3, review:1~3 }
+let channelState = {}; // { pr:1~3, sns:1~3, community:1~3, review:1~3, wiki:1~3, schema:1~3 } (계산 결과)
 let currentWinner = 'A';
+const leadInfo = { name:'', contact:'', site:'' };
 
 function $(id){ return document.getElementById(id); }
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   $(id).classList.add('active');
+  window.scrollTo(0,0);
 }
 
 function setGauge(fgEl, ratio){
@@ -676,24 +841,32 @@ function setGauge(fgEl, ratio){
   fgEl.style.strokeDashoffset = offset;
 }
 
+const TYPE_TOTAL = QUESTIONS.filter(q=>q.kind==='type').length; // 9
+const CHANNEL_TOTAL = QUESTIONS.length - TYPE_TOTAL; // 11
+
 function startQuiz(){
   current = 0;
   answers = [];
   scores.A = 0; scores.B = 0; scores.C = 0;
-  Object.keys(channelState).forEach(k=> delete channelState[k]);
-  $('qTotal').textContent = QUESTIONS.length;
+  channelState = {};
   showScreen('screen-quiz');
   renderQuestion();
 }
 
 function renderQuestion(){
   const q = QUESTIONS[current];
-  $('qNow').textContent = current+1;
-  $('progressFill').style.width = ((current+1)/QUESTIONS.length*100) + '%';
+  const isType = q.kind === 'type';
+
+  // 체감 길이를 줄이기 위해 전체(1/20)가 아니라 파트별 진행률(예: 3/9, 2/11)로 표시
+  const partTotal = isType ? TYPE_TOTAL : CHANNEL_TOTAL;
+  const partIndex = isType ? (current + 1) : (current + 1 - TYPE_TOTAL);
+  $('qNow').textContent = partIndex;
+  $('qTotal').textContent = partTotal;
+  $('progressFill').style.width = (partIndex/partTotal*100) + '%';
   $('backBtn').disabled = (current === 0);
 
   const tagEl = $('qSectionTag');
-  tagEl.textContent = q.section;
+  tagEl.textContent = (isType ? 'PART 1 · ' : 'PART 2 · ') + q.section;
   tagEl.className = 'q-section-tag' + (q.kind === 'channel' ? ' channel' : '');
 
   $('qText').textContent = q.text;
@@ -709,15 +882,17 @@ function renderQuestion(){
     btn.onclick = ()=>selectOption(opt.value);
     wrap.appendChild(btn);
   });
+
+  // 질문을 몇 개 겪고 나서부터(=이미 몰입한 시점부터) 상담 바로가기 링크 노출
+  $('skipConsultBtn').classList.toggle('hidden', current < 3);
 }
 
 function applyAnswer(qIndex, value){
   const q = QUESTIONS[qIndex];
   if(q.kind === 'type'){
     scores[value] += 1;
-  } else {
-    channelState[q.channelKey] = value;
   }
+  // channel 질문은 answers[]에만 기록해두고, 채널당 여러 문항을 마지막에 한 번에 집계한다 (computeChannelLevels)
 }
 
 function revertAnswer(qIndex){
@@ -726,9 +901,26 @@ function revertAnswer(qIndex){
   if(prev === undefined) return;
   if(q.kind === 'type'){
     scores[prev] -= 1;
-  } else {
-    delete channelState[q.channelKey];
   }
+}
+
+// 채널별로 여러 문항의 응답(1~3)을 평균 내어 최종 준비도 레벨을 계산한다
+function computeChannelLevels(){
+  const groups = {};
+  QUESTIONS.forEach((q, idx)=>{
+    if(q.kind !== 'channel') return;
+    const v = answers[idx];
+    if(v === undefined) return;
+    if(!groups[q.channelKey]) groups[q.channelKey] = [];
+    groups[q.channelKey].push(v);
+  });
+  const result = {};
+  Object.keys(groups).forEach(key=>{
+    const arr = groups[key];
+    const avg = arr.reduce((a,b)=>a+b,0) / arr.length;
+    result[key] = Math.min(3, Math.max(1, Math.round(avg)));
+  });
+  return result;
 }
 
 function selectOption(value){
@@ -736,17 +928,48 @@ function selectOption(value){
   answers[current] = value;
   applyAnswer(current, value);
 
+  const finishedType = QUESTIONS[current].kind === 'type';
   current += 1;
-  if(current < QUESTIONS.length){
-    renderQuestion();
-  } else {
+
+  if(current >= QUESTIONS.length){
     showResultTeaser();
+    return;
   }
+
+  const enteringChannelPart = finishedType && QUESTIONS[current].kind === 'channel';
+  if(enteringChannelPart){
+    showCheckpoint();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showCheckpoint(){
+  showScreen('screen-checkpoint');
+}
+
+function continueFromCheckpoint(){
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+// 퀴즈 도중 언제든 상담 신청으로 바로 이동할 수 있는 이탈 경로
+function goToConsultMidway(){
+  const params = new URLSearchParams({
+    name: leadInfo.name || '',
+    contact: leadInfo.contact || '',
+    site: leadInfo.site || '',
+    plan: 'free',
+    resultType: '',
+    source: 'quiz-midway'
+  });
+  window.location.href = 'consultation-form.html?' + params.toString();
 }
 
 function goBack(){
   if(current === 0) return;
   current -= 1;
+  showScreen('screen-quiz');
   renderQuestion();
 }
 
@@ -783,22 +1006,40 @@ function showResultTeaser(){
 function handleLeadSubmit(e){
   e.preventDefault();
   const name = $('leadName').value.trim() || '고객';
+  leadInfo.name = name;
+  leadInfo.contact = $('leadContact').value.trim();
+  leadInfo.site = $('leadSite').value.trim();
   showResultFull(name);
+}
+
+function goToConsult(plan){
+  const params = new URLSearchParams({
+    name: leadInfo.name || '',
+    contact: leadInfo.contact || '',
+    site: leadInfo.site || '',
+    plan: plan,
+    resultType: currentWinner || ''
+  });
+  window.location.href = 'consultation-form.html?' + params.toString();
 }
 
 const LEVEL_COLOR = { 1:'var(--red)', 2:'var(--yellow)', 3:'var(--green)' };
 const LEVEL_TEXT = { 1:'미흡', 2:'보통', 3:'우수' };
-const CHANNEL_LABEL = { pr:'PR/미디어', sns:'소셜미디어', community:'커뮤니티/플랫폼', review:'리뷰' };
+const CHANNEL_LABEL = { pr:'PR/미디어', sns:'소셜미디어', community:'커뮤니티/플랫폼', review:'리뷰', wiki:'공개 정보 등재', schema:'웹사이트 정보 구조' };
 // 채널별 약점이 CTA(정밀진단) 단계에서만 노출되는 대행사 차별화 메시지
 const CHANNEL_EDGE = {
   pr: "💡 PR/미디어는 저희가 직접 운영하는 언론사 <b>대한청년일보</b>를 통해 실제 기사화까지 가장 빠르게 진행할 수 있는 영역이에요.",
   sns: "💡 소셜미디어는 대행팀이 기획부터 제작·운영까지 전담해 콘텐츠 공백 없이 채워드릴 수 있는 영역이에요.",
   community: "💡 커뮤니티/플랫폼은 대행팀이 입점 전략과 채널별 최적화를 함께 설계해 확장 속도를 높여드릴 수 있어요.",
   review: "💡 리뷰는 대행팀의 관리 체계를 붙이면 가장 빠르게 신뢰 지표를 끌어올릴 수 있는 영역이에요.",
+  wiki: "💡 공개 정보 등재는 대행팀이 등록·정정 절차를 대신 진행해 빠르게 기본기를 채워드릴 수 있는 영역이에요.",
+  schema: "💡 웹사이트 정보 구조는 대행팀의 기술 파트너가 함께 세팅해드릴 수 있는 영역이에요.",
 };
 
 function renderChannels(){
-  ['pr','sns','community','review'].forEach(key=>{
+  channelState = computeChannelLevels();
+
+  ['pr','sns','community','review','wiki','schema'].forEach(key=>{
     const lvl = channelState[key] || 1;
     const bar = $('bar-'+key);
     const badge = $('badge-'+key);
@@ -815,7 +1056,7 @@ function renderChannels(){
   const summary = $('channelSummary');
   if(weakest){
     // 진단표 단계에서는 채널명만 짚어주고, 해결 주체는 아직 드러내지 않음 (중립 유지)
-    summary.innerHTML = '4개 채널 중 가장 보강이 시급한 곳은 <b>'+CHANNEL_LABEL[weakest[0]]+'</b>이에요. 정밀 진단에서는 이 부분부터 구체적인 실행 전략을 제안해드려요.';
+    summary.innerHTML = '6개 채널 중 가장 보강이 시급한 곳은 <b>'+CHANNEL_LABEL[weakest[0]]+'</b>이에요. 정밀 진단에서는 이 부분부터 구체적인 실행 전략을 제안해드려요.';
 
     // 대행사 차별화 메시지는 CTA(정밀진단) 카드에서만 노출
     const edgeEl = $('premiumEdge');
@@ -839,7 +1080,6 @@ function showResultFull(name){
   renderChannels();
 
   showScreen('screen-result-full');
-  window.scrollTo(0,0);
 }
 
 function restartQuiz(){
@@ -852,6 +1092,5 @@ window.addEventListener('load', ()=>{
   setTimeout(()=> setGauge($('introGaugeFg'), 0.72), 300);
 });
 </script>
-
 </body>
 </html>
