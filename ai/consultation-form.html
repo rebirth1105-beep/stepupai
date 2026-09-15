@@ -24,7 +24,7 @@
     --r-lg:24px;--r-md:16px;--r-btn:12px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  html,body{height:100%;}
+  html{height:100%;}
   body{
     font-family:'Inter','Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,sans-serif;
     background:var(--surface);color:var(--ink);min-height:100vh;line-height:1.6;
@@ -100,6 +100,14 @@
     border:1.5px solid var(--border);padding:12px 22px;border-radius:var(--r-btn);
   }
   .success a:hover{border-color:var(--blue);background:#EAF2FF;}
+  .success .icon.limit{background:#EAF2FF;border-color:#D7E7FF;}
+  .limit-cta{
+    display:block;background:var(--grad-cta);color:var(--white)!important;border:none!important;
+    box-shadow:var(--shadow-glow);margin-bottom:12px;
+  }
+  .limit-secondary{
+    display:block;background:transparent;border:1.5px solid var(--border)!important;color:var(--muted)!important;
+  }
 
   #formWrap.hidden{display:none;}
 </style>
@@ -108,7 +116,7 @@
 
 <div class="stage">
   <div class="head">
-    <a href="ai-search-diagnosis.html" class="back-link">
+    <a href="index.html" class="back-link">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
       진단표로 돌아가기
     </a>
@@ -165,7 +173,17 @@
     </div>
     <h2>신청이 완료됐어요</h2>
     <p>남겨주신 연락처로 영업일 기준 1~2일 내에 담당자가 연락드릴게요. 조금만 기다려주세요.</p>
-    <a href="ai-search-diagnosis.html">진단표로 돌아가기</a>
+    <a href="index.html">진단표로 돌아가기</a>
+  </div>
+
+  <div class="success" id="limitWrap">
+    <div class="icon limit">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#276EF1" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+    </div>
+    <h2>이미 무료 상담을 받으신 이력이 있어요</h2>
+    <p>무료 15분 상담은 1인당 1회만 제공돼요. 더 깊이 있는 진단과 실행 전략이 필요하시면, 정밀 진단 + 컨설팅으로 바로 신청해보세요.</p>
+    <a href="#" onclick="switchToPremiumFromLimit(); return false;" class="limit-cta">정밀 진단 + 컨설팅으로 신청하기 →</a>
+    <a href="index.html" class="limit-secondary">진단표로 돌아가기</a>
   </div>
 </div>
 
@@ -175,7 +193,7 @@
    웹앱 URL('...../exec')로 교체해야 실제로 스프레드시트에 저장됩니다.
    설정 방법은 함께 전달드린 google-apps-script.js 파일 상단 주석 참고.
 ===================================================================== */
-const GAS_URL = "https://script.google.com/macros/s/AKfycbwbvfTRT2RB3kzFtYfTXG4Ms7lILHaHdQxqEv8XkQyTdEl3vVVnkvwHsNo4odIDfxJH/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbyPkGUbeGPOqyn6oPTZR6RA2TYJOJEgJ1EpUUHvniZaKvTL25ImquC9boQG5z0Ni-Zl/exec";
 
 let selectedPlan = 'free';
 
@@ -195,11 +213,39 @@ function prefillFromQuery(){
   selectPlan(plan === 'premium' ? 'premium' : 'free');
 }
 
-function handleSubmit(e){
+async function handleSubmit(e){
   e.preventDefault();
   const btn = document.getElementById('submitBtn');
+  const originalText = btn.textContent;
   btn.disabled = true;
+  btn.textContent = '확인 중...';
+
+  const contactValue = document.getElementById('contact').value.trim();
+
+  // 무료 상담은 1인 1회만 — 제출 전에 이미 받은 이력이 있는지 먼저 확인
+  if(selectedPlan === 'free' && GAS_URL.indexOf('PASTE_YOUR') !== 0){
+    try{
+      const checkUrl = GAS_URL + '?action=check&type=consult_free&contact=' + encodeURIComponent(contactValue);
+      const res = await fetch(checkUrl);
+      const data = await res.json();
+      if(data && data.exists){
+        btn.disabled = false;
+        btn.textContent = originalText;
+        showFreeLimitNotice();
+        return;
+      }
+    } catch(err){
+      console.error('무료 상담 이력 확인 중 오류:', err);
+      // 확인 실패 시에도 신청 자체는 막지 않고 진행
+    }
+  }
+
   btn.textContent = '전송 중...';
+  submitConsultation();
+}
+
+function submitConsultation(){
+  const btn = document.getElementById('submitBtn');
 
   const q = new URLSearchParams(window.location.search);
   const payload = new URLSearchParams({
@@ -231,6 +277,19 @@ function handleSubmit(e){
     console.error('상담 신청 저장 중 오류가 발생했습니다.');
     showSuccess();
   });
+}
+
+// 무료 상담을 이미 받은 사람에게 보여주는 안내 — 유료 정밀진단으로 자연스럽게 전환 유도
+function showFreeLimitNotice(){
+  document.getElementById('formWrap').classList.add('hidden');
+  document.getElementById('limitWrap').classList.add('active');
+}
+
+// 무료 상담 제한 안내에서 "정밀 진단으로 신청" 클릭 시 → 폼으로 돌아가되 유료로 전환
+function switchToPremiumFromLimit(){
+  document.getElementById('limitWrap').classList.remove('active');
+  document.getElementById('formWrap').classList.remove('hidden');
+  selectPlan('premium');
 }
 
 function showSuccess(){
