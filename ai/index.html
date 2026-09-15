@@ -1059,7 +1059,7 @@ const leadInfo = { name:'', contact:'', site:'' };
 
 /* ⚠️ 설정 필수: Google Apps Script 배포 후 발급된 웹앱 URL('...../exec')로 교체하세요.
    consultation-form.html에 넣은 것과 반드시 동일한 URL이어야 합니다. */
-const GAS_URL = "https://script.google.com/macros/s/AKfycbwbvfTRT2RB3kzFtYfTXG4Ms7lILHaHdQxqEv8XkQyTdEl3vVVnkvwHsNo4odIDfxJH/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbyPkGUbeGPOqyn6oPTZR6RA2TYJOJEgJ1EpUUHvniZaKvTL25ImquC9boQG5z0Ni-Zl/exec";
 
 function $(id){ return document.getElementById(id); }
 function showScreen(id){
@@ -1259,7 +1259,23 @@ function handleLeadSubmit(e){
   leadInfo.name = name;
   leadInfo.contact = $('leadContact').value.trim();
   leadInfo.site = $('leadSite').value.trim();
+
+  logLeadImmediately(); // 상담/보고서를 나중에 안 눌러도 이 시점에 바로 리드를 저장해둔다
+
   showResultFull(name);
+}
+
+// 리드폼 제출 즉시 구글시트에 저장 (응답을 읽을 필요 없어 no-cors로 전송, 실패해도 사용자 흐름은 막지 않음)
+function logLeadImmediately(){
+  if(GAS_URL.indexOf('PASTE_YOUR') === 0) return;
+  const params = new URLSearchParams({
+    action: 'log_lead',
+    name: leadInfo.name || '',
+    contact: leadInfo.contact || '',
+    site: leadInfo.site || '',
+    resultType: currentWinner || ''
+  });
+  fetch(GAS_URL, { method:'POST', mode:'no-cors', body: params }).catch(()=>{});
 }
 
 function goToConsult(plan){
