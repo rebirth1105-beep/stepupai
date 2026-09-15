@@ -30,7 +30,7 @@
     --r-btn:12px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  html,body{height:100%;}
+  html{height:100%;}
   body{
     font-family:'Inter','Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,system-ui,Roboto,sans-serif;
     background:var(--surface);
@@ -57,7 +57,6 @@
     position:relative;
     border:1px solid var(--border);
     min-height:100vh;
-    overflow:hidden;
   }
   @media (min-width:760px){
     body{display:flex;align-items:center;justify-content:center;padding:40px 24px;}
@@ -355,6 +354,148 @@
   }
   .restart-line button:hover{color:var(--blue);}
 
+  /* ---------- 진단 결과 보고서 버튼 (결과 화면 내) ---------- */
+  .report-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    width:100%;margin-top:24px;padding:14px 16px;
+    background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-btn);
+    font-size:13px;font-weight:800;color:var(--ink);cursor:pointer;
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .report-btn:hover{border-color:var(--blue);color:var(--blue);}
+
+  /* ---------- 종합 분석 · 다음 액션 ---------- */
+  .synthesis-block{padding:36px 36px 8px;background:var(--white);}
+  .synthesis-block h3{
+    font-size:13px;color:var(--ink);letter-spacing:.02em;margin-bottom:6px;
+    display:flex;align-items:center;gap:10px;font-weight:800;
+  }
+  .synthesis-block h3::before{content:"";width:18px;height:3px;border-radius:2px;background:var(--grad-cta);display:inline-block;}
+  .synthesis-intro{font-size:12.5px;font-weight:500;color:var(--muted);margin-bottom:20px;line-height:1.7;}
+  .synthesis-card{
+    background:linear-gradient(160deg,#071533 0%, #0d2350 100%);
+    border-radius:var(--r-md);padding:26px 24px;color:var(--white);
+  }
+  .synthesis-badge{
+    display:inline-block;font-size:10.5px;letter-spacing:.1em;font-weight:800;color:var(--blue-light);
+    background:rgba(39,110,241,0.18);border:1px solid rgba(39,110,241,0.4);border-radius:20px;
+    padding:5px 12px;margin-bottom:14px;text-transform:uppercase;
+  }
+  .synthesis-title{font-size:17px;font-weight:900;margin-bottom:10px;line-height:1.5;}
+  .synthesis-framing{font-size:12.5px;font-weight:500;color:rgba(255,255,255,0.68);line-height:1.7;margin-bottom:18px;}
+  .synthesis-steps{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:12px;}
+  .synthesis-steps li{
+    counter-increment:step;position:relative;padding-left:30px;font-size:13px;font-weight:600;
+    color:var(--white);line-height:1.6;
+  }
+  .synthesis-steps li::before{
+    content:counter(step);position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;
+    background:var(--grad-cta);color:var(--white);font-size:11px;font-weight:800;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .synthesis-note{
+    margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.14);
+    font-size:11.5px;font-weight:500;color:rgba(255,255,255,0.55);line-height:1.6;
+  }
+
+  .rank-list{display:flex;flex-direction:column;gap:8px;margin-top:16px;}
+  .rank-row{
+    display:flex;align-items:center;gap:12px;padding:12px 14px;
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  }
+  .rank-row.is-top{background:#EAF2FF;border-color:#D7E7FF;}
+  .rank-num{
+    width:22px;height:22px;border-radius:50%;background:var(--white);border:1.5px solid var(--border);
+    display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--muted);
+    flex-shrink:0;
+  }
+  .rank-row.is-top .rank-num{background:var(--grad-cta);border:none;color:var(--white);}
+  .rank-name{font-size:12.5px;font-weight:800;color:var(--ink);width:96px;flex-shrink:0;}
+  .rank-note{font-size:11.5px;font-weight:500;color:var(--muted);flex:1;}
+  .rank-badge{font-size:10px;font-weight:800;color:var(--white);padding:3px 10px;border-radius:20px;flex-shrink:0;}
+  .rank-closing{font-size:12px;font-weight:600;color:var(--muted);text-align:center;margin-top:16px;line-height:1.6;}
+
+  /* ---------- 보고서 화면(screen-report) ---------- */
+  #screen-report{background:#E7ECF3;}
+  .report-actions{
+    max-width:900px;margin:0 auto;padding:20px 24px 0;
+    display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+  }
+  .report-action-btn{
+    display:flex;align-items:center;gap:8px;border:none;border-radius:var(--r-btn);
+    padding:12px 20px;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:.01em;
+    background:var(--white);color:var(--ink);border:1.5px solid var(--border);
+  }
+  .report-action-btn.primary{background:var(--grad-cta);color:var(--white);border:none;box-shadow:var(--shadow-glow);}
+  .report-action-btn:hover{opacity:.9;}
+
+  .report-wrap{display:flex;justify-content:center;padding:24px 16px 48px;}
+  .report-page{
+    width:210mm;min-height:297mm;background:var(--white);
+    box-shadow:0 12px 40px rgba(20,45,90,0.18);
+    padding:16mm 16mm 14mm;color:var(--ink);
+    display:flex;flex-direction:column;
+  }
+  .report-header{
+    display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:16px;
+  }
+  .report-brand{font-size:13px;font-weight:900;letter-spacing:.08em;color:var(--ink);}
+  .report-meta{font-size:11px;font-weight:600;color:var(--muted);}
+  .report-meta b{color:var(--ink);}
+
+  .report-half{padding:14px 0;}
+  .report-part-label{
+    display:inline-block;font-size:10px;letter-spacing:.1em;font-weight:800;color:var(--blue);
+    background:#EAF2FF;border:1px solid #D7E7FF;border-radius:20px;padding:4px 12px;margin-bottom:12px;
+  }
+  .report-type-row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:12px;}
+  .report-type-title{font-size:17px;font-weight:900;color:var(--ink);margin-bottom:4px;line-height:1.4;}
+  .report-type-sub{font-size:11.5px;font-weight:500;color:var(--muted);max-width:340px;line-height:1.6;}
+  .report-signal{text-align:center;flex-shrink:0;}
+  .report-lights{display:flex;gap:6px;justify-content:center;margin-bottom:6px;}
+  .r-light{width:14px;height:14px;border-radius:50%;background:#E4E9F1;display:inline-block;}
+  .r-light.on-red{background:var(--red);}
+  .r-light.on-yellow{background:var(--yellow);}
+  .r-light.on-green{background:var(--green);}
+  .report-verdict{font-size:10.5px;font-weight:800;color:var(--ink);white-space:nowrap;}
+
+  .report-reasons{list-style:none;}
+  .report-reasons li{
+    display:flex;gap:8px;font-size:11.5px;font-weight:500;color:#39435A;line-height:1.6;padding:5px 0;
+  }
+  .report-reasons li .mark{color:var(--blue);font-weight:900;flex-shrink:0;}
+
+  .report-divider{height:1px;background:var(--border);margin:4px 0;}
+
+  .report-channels{display:flex;flex-direction:column;gap:9px;margin-bottom:12px;}
+  .report-channel-row{display:flex;align-items:center;gap:10px;}
+  .report-channel-name{font-size:11px;font-weight:700;width:96px;flex-shrink:0;}
+  .report-channel-track{flex:1;height:7px;background:var(--border);border-radius:4px;overflow:hidden;}
+  .report-channel-fill{height:100%;border-radius:4px;}
+  .report-channel-badge{font-size:9.5px;font-weight:800;width:30px;flex-shrink:0;text-align:right;}
+
+  .report-weakest{
+    font-size:11.5px;font-weight:600;color:var(--muted);background:var(--surface);
+    border:1px solid var(--border);border-radius:8px;padding:10px 12px;line-height:1.6;
+  }
+  .report-weakest b{color:var(--ink);font-weight:800;}
+
+  .report-footer{margin-top:auto;padding-top:16px;border-top:1px solid var(--border);}
+  .report-footer-text{font-size:9.5px;font-weight:500;color:var(--muted);line-height:1.6;margin-bottom:6px;}
+  .report-footer-brand{font-size:9px;font-weight:800;letter-spacing:.1em;color:#A7B2C6;text-transform:uppercase;}
+
+  .no-print{}
+  @media print{
+    body *{visibility:hidden;}
+    #screen-report, #screen-report *{visibility:visible;}
+    #screen-report{position:absolute;top:0;left:0;width:100%;background:var(--white);}
+    .no-print{display:none !important;}
+    .report-wrap{padding:0;}
+    .report-page{box-shadow:none;width:100%;min-height:100vh;margin:0;}
+    @page{size:A4;margin:0;}
+  }
+
   @media (max-width:480px){
     .intro{padding:56px 24px 44px;}
     .quiz{padding:72px 24px 40px;}
@@ -363,8 +504,20 @@
     .full-recap{padding:20px 24px;}
     .result-body{padding:32px 24px 12px;}
     .channel-block{padding:30px 24px 8px;}
+    .synthesis-block{padding:28px 24px 8px;}
+    .rank-row{flex-wrap:wrap;}
+    .rank-name{width:auto;}
+    .rank-note{width:100%;order:3;padding-left:34px;}
     .cta-block{padding:32px 24px 44px;}
     .cta-cards{flex-direction:column;}
+    .report-wrap{padding:16px 0 40px;}
+    .report-page{
+      width:210mm;
+      transform:scale(0.42);
+      transform-origin:top center;
+      margin-bottom:calc(-297mm * 0.58);
+    }
+    .report-actions{padding:16px 16px 0;}
   }
 </style>
 </head>
@@ -387,7 +540,7 @@
         </div>
       </div>
       <h1>AI 검색에서<br>내 사업은 <em>몇 등급</em>일까?</h1>
-      <p class="desc">ChatGPT, Gemini 같은 AI 검색이 당신의 사업을 얼마나 알아보는지,<br>20개의 질문으로 지금 상태와 채널별 준비도를 함께 진단해드립니다.</p>
+      <p class="desc">ChatGPT, Gemini 같은 AI 검색이 당신의 사업을 얼마나 알아보는지,<br>사업 진단 10문항 + 채널 점검 10문항, 두 파트로 나눠 진단해드립니다.</p>
       <button class="start-btn" onclick="startQuiz()">진단 시작하기</button>
       <div class="meta-line mono">약 2~3분 소요 · 결과에 따른 맞춤 전략 안내</div>
     </div>
@@ -423,7 +576,7 @@
       </div>
       <div class="cp-eyebrow">PART 1 완료</div>
       <h2 class="cp-title">사업 진단이 끝났어요</h2>
-      <p class="cp-desc">이제 6가지 채널의 준비도만 빠르게 점검하면 진단표가 완성돼요. 약 1분이면 충분해요.</p>
+      <p class="cp-desc">이제 5가지 채널의 준비도만 빠르게 점검하면 진단표가 완성돼요. 약 1분이면 충분해요.</p>
       <button type="button" class="start-btn" onclick="continueFromCheckpoint()">채널 점검 시작하기 →</button>
       <button type="button" class="cp-skip" onclick="goToConsultMidway()">채널 점검 결과를 기다리지 않고 바로 상담받고 싶다면 →</button>
     </div>
@@ -442,7 +595,7 @@
         </svg>
         <div class="gauge-label">
           <div class="num" id="teaserScoreNum">0%</div>
-          <div class="cap">일치도</div>
+          <div class="cap">준비도</div>
         </div>
       </div>
 
@@ -462,7 +615,7 @@
     <div class="teaser-body">
       <div class="lock-preview">
         <div class="lp-label">진단표 미리보기</div>
-        <div class="lp-text" id="lockPreviewText">이 결과가 나온 이유와 6가지 채널의 준비도 분석, 지금 바로 시작해야 할 우선순위까지 확인할 수 있어요.</div>
+        <div class="lp-text" id="lockPreviewText">이 결과가 나온 이유와 5가지 채널의 준비도 분석, 지금 바로 시작해야 할 우선순위까지 확인할 수 있어요.</div>
         <div class="lp-more"><span>🔒 전체 진단표는 아래 정보를 입력하면 확인할 수 있어요</span></div>
       </div>
 
@@ -501,7 +654,7 @@
 
     <div class="channel-block">
       <h3>채널별 AI 검색 준비도</h3>
-      <p class="channel-intro">답변하신 내용을 바탕으로 6가지 채널의 준비도를 분석했어요. AI는 이 여섯 곳의 정보를 종합해 당신을 검색 결과에 인용할지 판단합니다.</p>
+      <p class="channel-intro">답변하신 내용을 바탕으로 5가지 채널의 준비도를 분석했어요. AI는 이 다섯 곳의 정보를 종합해 당신을 검색 결과에 인용할지 판단합니다.</p>
 
       <div class="channel-row" data-key="pr">
         <div class="channel-row-top">
@@ -535,29 +688,40 @@
         <div class="channel-bar-track"><div class="channel-bar-fill" id="bar-review"></div></div>
       </div>
 
-      <div class="channel-row" data-key="wiki">
+      <div class="channel-row" data-key="presence">
         <div class="channel-row-top">
-          <span class="channel-name">공개 정보 등재</span>
-          <span class="channel-level-badge" id="badge-wiki"></span>
+          <span class="channel-name">공개 정보 신뢰도</span>
+          <span class="channel-level-badge" id="badge-presence"></span>
         </div>
-        <div class="channel-bar-track"><div class="channel-bar-fill" id="bar-wiki"></div></div>
-      </div>
-
-      <div class="channel-row" data-key="schema">
-        <div class="channel-row-top">
-          <span class="channel-name">웹사이트 정보 구조</span>
-          <span class="channel-level-badge" id="badge-schema"></span>
-        </div>
-        <div class="channel-bar-track"><div class="channel-bar-fill" id="bar-schema"></div></div>
+        <div class="channel-bar-track"><div class="channel-bar-fill" id="bar-presence"></div></div>
       </div>
 
       <div class="channel-summary" id="channelSummary"></div>
       <div class="trust-footnote">이 진단표는 GEO 전문 대행사 · 언론사 <b>대한청년일보</b> 운영진이 함께 설계했습니다.</div>
+      <button type="button" class="report-btn" id="reportBtn" onclick="handleReportRequest()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+        진단 결과 1장 보고서로 받기 (PDF)
+      </button>
+    </div>
+
+    <div class="synthesis-block">
+      <h3>종합 분석 · 우선순위 액션</h3>
+      <p class="synthesis-intro">사업 진단(PART 1)과 채널 점검(PART 2) 결과를 함께 보면, 5개 채널의 우선순위가 이렇게 정리돼요.</p>
+      <div class="synthesis-card">
+        <div class="synthesis-badge" id="synthesisBadge"></div>
+        <div class="synthesis-title" id="synthesisTitle"></div>
+        <p class="synthesis-framing" id="synthesisFraming"></p>
+        <ol class="synthesis-steps" id="synthesisSteps"></ol>
+        <p class="synthesis-note" id="synthesisNote"></p>
+      </div>
+
+      <div class="rank-list" id="synthesisRanked"></div>
+      <p class="rank-closing">5개 채널을 동시에, 순서에 맞게 관리하려면 체계적인 실행 계획이 필요해요.</p>
     </div>
 
     <div class="cta-block">
       <div class="cta-block-title">다음 단계를 선택해주세요</div>
-      <div class="cta-block-sub">진단표만으로는 실행 전략까지 알기 어려워요. 상황에 맞는 다음 단계를 골라보세요.</div>
+      <div class="cta-block-sub" id="ctaBlockSub">이 진단표만으로는 여기까지가 한계예요. 실제 실행 전략은 상황에 맞게 짜야 해요.</div>
       <div class="cta-cards">
         <div class="cta-card free">
           <div class="ct-name">FREE</div>
@@ -578,7 +742,73 @@
     </div>
   </section>
 
+  <!-- ============ REPORT LIMIT (이미 무료 보고서를 받은 경우) ============ -->
+  <section class="screen" id="screen-report-limit">
+    <div class="checkpoint">
+      <div class="cp-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#276EF1" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      </div>
+      <div class="cp-eyebrow">무료 보고서 안내</div>
+      <h2 class="cp-title">이미 무료 진단 보고서를 받으신 이력이 있어요</h2>
+      <p class="cp-desc">무료 보고서는 1인당 1회만 제공돼요. 더 정밀한 분석이나 실행 전략이 필요하시면 상담을 통해 자세히 안내해드릴게요.</p>
+      <button type="button" class="start-btn" onclick="goToConsult('free')">상담 신청하기 →</button>
+      <button type="button" class="cp-skip" onclick="backToResultFull()">← 결과 화면으로 돌아가기</button>
+    </div>
+  </section>
+
 </div>
+
+<!-- ============ REPORT (1장짜리 인쇄/PDF용 보고서) — .stage 바깥의 독립 화면 ============ -->
+<section class="screen" id="screen-report">
+  <div class="report-actions no-print">
+    <button type="button" class="report-action-btn primary" onclick="window.print()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+      PDF로 저장 / 인쇄하기
+    </button>
+    <button type="button" class="report-action-btn" onclick="backToResultFull()">← 결과 화면으로 돌아가기</button>
+  </div>
+
+  <div class="report-wrap">
+    <div class="report-page" id="reportPage">
+      <div class="report-header">
+        <div class="report-brand">AI SEARCH DIAGNOSIS REPORT</div>
+        <div class="report-meta"><span id="reportDate"></span> · <b id="reportName">고객</b>님</div>
+      </div>
+
+      <div class="report-half">
+        <div class="report-part-label">PART 1 · 사업 진단</div>
+        <div class="report-type-row">
+          <div>
+            <div class="report-type-title" id="reportTypeTitle"></div>
+            <div class="report-type-sub" id="reportTypeSub"></div>
+          </div>
+          <div class="report-signal">
+            <div class="report-lights">
+              <span class="r-light" id="rLightRed"></span>
+              <span class="r-light" id="rLightYellow"></span>
+              <span class="r-light" id="rLightGreen"></span>
+            </div>
+            <div class="report-verdict" id="reportVerdict"></div>
+          </div>
+        </div>
+        <ul class="report-reasons" id="reportReasons"></ul>
+      </div>
+
+      <div class="report-divider"></div>
+
+      <div class="report-half">
+        <div class="report-part-label">PART 2 · 채널 점검</div>
+        <div class="report-channels" id="reportChannels"></div>
+        <div class="report-weakest" id="reportWeakest"></div>
+      </div>
+
+      <div class="report-footer">
+        <div class="report-footer-text">이 보고서는 GEO 전문 대행사 · 언론사 <b>대한청년일보</b> 운영진이 함께 설계한 진단 결과입니다. 더 자세한 실행 전략이 필요하시면 언제든 문의해주세요.</div>
+        <div class="report-footer-brand">GEO DIAGNOSIS REPORT</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <script>
 
@@ -643,6 +873,15 @@ const QUESTIONS = [
     ]
   },
   {
+    kind:'type', section:'브랜드 신뢰 신호',
+    text: "웹사이트, SNS, 블로그 등에서 회사 소개 문구는 어느 정도 통일되어 있나요?",
+    options: [
+      { t:"채널마다 조금씩 다르게 쓰고 있고, 딱히 신경 쓰지 못했어요", value:"A" },
+      { t:"대체로 비슷하지만 세부 표현은 채널마다 조금씩 달라요", value:"B" },
+      { t:"온라인 채널 자체가 아직 많지 않아 비교할 것도 없어요", value:"C" },
+    ]
+  },
+  {
     kind:'type', section:'지속 투자 여력',
     text: "GEO(생성형 AI 검색 최적화)를 시작한다면 가장 기대하는 결과는?",
     options: [
@@ -662,11 +901,11 @@ const QUESTIONS = [
   },
   {
     kind:'type', section:'지속 투자 여력',
-    text: "웹사이트, SNS, 블로그 등에서 회사 소개 문구는 어느 정도 통일되어 있나요?",
+    text: "AI 검색 결과에 우리 브랜드가 어떻게 나오는지 확인해본 적 있으신가요?",
     options: [
-      { t:"채널마다 조금씩 다르게 쓰고 있고, 딱히 신경 쓰지 못했어요", value:"A" },
-      { t:"대체로 비슷하지만 세부 표현은 채널마다 조금씩 달라요", value:"B" },
-      { t:"온라인 채널 자체가 아직 많지 않아 비교할 것도 없어요", value:"C" },
+      { t:"따로 확인은 안 했지만, 확인해봐야 한다는 건 알고 있었어요", value:"A" },
+      { t:"가끔 생각날 때 확인하면서 상황을 지켜보고 있어요", value:"B" },
+      { t:"그런 걸 확인해볼 수 있다는 것 자체를 잘 몰랐어요", value:"C" },
     ]
   },
   {
@@ -742,7 +981,7 @@ const QUESTIONS = [
     ]
   },
   {
-    kind:'channel', channelKey:'wiki', section:'채널 점검 · 공개 정보 등재',
+    kind:'channel', channelKey:'presence', section:'채널 점검 · 공개 정보 신뢰도',
     text: "위키백과, 나무위키 등 오픈 백과사전에 회사·브랜드 정보가 등록되어 있나요?",
     options: [
       { t:"등록되어 있지 않아요", value:1 },
@@ -751,16 +990,7 @@ const QUESTIONS = [
     ]
   },
   {
-    kind:'channel', channelKey:'wiki', section:'채널 점검 · 공개 정보 등재',
-    text: "대표자명, 설립일, 서비스 설명 같은 기본 정보가 여러 사이트(홈페이지·포털·SNS 등)에서 서로 일치하나요?",
-    options: [
-      { t:"확인해본 적이 없어요", value:1 },
-      { t:"대체로 비슷하지만 다른 부분도 있어요", value:2 },
-      { t:"어디서든 정확히 똑같아요", value:3 },
-    ]
-  },
-  {
-    kind:'channel', channelKey:'schema', section:'채널 점검 · 웹사이트 정보 구조',
+    kind:'channel', channelKey:'presence', section:'채널 점검 · 공개 정보 신뢰도',
     text: "웹사이트에 검색엔진이나 AI가 내용을 더 쉽게 이해하도록 돕는 구조화된 정보(메타데이터 등)를 넣어보신 적 있나요?",
     options: [
       { t:"전혀 모르고, 신경 써본 적도 없어요", value:1 },
@@ -823,16 +1053,21 @@ const RESULTS = {
 --------------------------------------------------------- */
 let current = 0;
 let answers = []; // 각 질문에서 선택한 값 기록 (뒤로가기용)
-const scores = { A:0, B:0, C:0 };
-let channelState = {}; // { pr:1~3, sns:1~3, community:1~3, review:1~3, wiki:1~3, schema:1~3 } (계산 결과)
+let channelState = {}; // { pr:1~3, sns:1~3, community:1~3, review:1~3, presence:1~3 } (계산 결과)
 let currentWinner = 'A';
 const leadInfo = { name:'', contact:'', site:'' };
+
+/* ⚠️ 설정 필수: Google Apps Script 배포 후 발급된 웹앱 URL('...../exec')로 교체하세요.
+   consultation-form.html에 넣은 것과 반드시 동일한 URL이어야 합니다. */
+const GAS_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 function $(id){ return document.getElementById(id); }
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   $(id).classList.add('active');
   window.scrollTo(0,0);
+  // screen-report는 .stage 바깥의 독립된 전체 페이지이므로, 뜰 때는 .stage를 숨긴다
+  $('stage').style.display = (id === 'screen-report') ? 'none' : '';
 }
 
 function setGauge(fgEl, ratio){
@@ -847,7 +1082,6 @@ const CHANNEL_TOTAL = QUESTIONS.length - TYPE_TOTAL; // 11
 function startQuiz(){
   current = 0;
   answers = [];
-  scores.A = 0; scores.B = 0; scores.C = 0;
   channelState = {};
   showScreen('screen-quiz');
   renderQuestion();
@@ -887,21 +1121,12 @@ function renderQuestion(){
   $('skipConsultBtn').classList.toggle('hidden', current < 3);
 }
 
-function applyAnswer(qIndex, value){
-  const q = QUESTIONS[qIndex];
-  if(q.kind === 'type'){
-    scores[value] += 1;
-  }
-  // channel 질문은 answers[]에만 기록해두고, 채널당 여러 문항을 마지막에 한 번에 집계한다 (computeChannelLevels)
-}
-
-function revertAnswer(qIndex){
-  const q = QUESTIONS[qIndex];
-  const prev = answers[qIndex];
-  if(prev === undefined) return;
-  if(q.kind === 'type'){
-    scores[prev] -= 1;
-  }
+// 채널 등급 임계값: 중심화 경향(응답자가 중간을 고르는 경향)을 보정해,
+// 애매한 평균(예: '보통'만 계속 고른 2.0)은 '보통'이 아니라 '미흡' 쪽으로 떨어지도록 기준을 올림
+function avgToChannelLevel(avg){
+  if(avg >= 2.7) return 3; // 우수 — 사실상 거의 모든 문항에서 최상위 답변이어야 함
+  if(avg >= 2.3) return 2; // 보통
+  return 1; // 미흡
 }
 
 // 채널별로 여러 문항의 응답(1~3)을 평균 내어 최종 준비도 레벨을 계산한다
@@ -918,15 +1143,43 @@ function computeChannelLevels(){
   Object.keys(groups).forEach(key=>{
     const arr = groups[key];
     const avg = arr.reduce((a,b)=>a+b,0) / arr.length;
-    result[key] = Math.min(3, Math.max(1, Math.round(avg)));
+    result[key] = avgToChannelLevel(avg);
   });
   return result;
 }
 
+// PART 1 유형 판정: A/B/C는 사실 순서가 있는 척도다 (C=0점 미흡 < A=1점 중간 < B=2점 우수).
+// 단순 다수결(플루럴리티)로 판정하면 살짝만 B가 많아도 전체가 '양호'로 쏠리는 문제가 있어서,
+// 점수를 %로 환산한 뒤 임계값을 올려(중심화 경향 보정) 애매하게 섞인 응답은 더 낮은 등급으로 판정되게 한다.
+const TYPE_POINT = { C:0, A:1, B:2 };
+
+function computeTypeResult(){
+  let totalPoints = 0;
+  let answeredCount = 0;
+  QUESTIONS.forEach((q, idx)=>{
+    if(q.kind !== 'type') return;
+    const v = answers[idx];
+    if(v === undefined) return;
+    totalPoints += TYPE_POINT[v];
+    answeredCount++;
+  });
+  const maxPoints = answeredCount * 2;
+  const percent = maxPoints > 0 ? (totalPoints / maxPoints * 100) : 0;
+
+  let winner;
+  if(percent >= 65) winner = 'B';      // 양호 — 응답의 약 3분의 2 이상이 최상위 선택지여야 함
+  else if(percent >= 35) winner = 'A'; // 주의
+  else winner = 'C';                   // 위험
+
+  // 화면에 보여주는 점수는 만점(100)을 주지 않고 85점을 상한으로 둔다.
+  // 완벽하게 답해도 "다 됐다"는 인상을 주지 않고, 개선 여지가 항상 남아있도록.
+  const displayPercent = Math.min(85, percent);
+
+  return { winner, percent, displayPercent };
+}
+
 function selectOption(value){
-  revertAnswer(current);
   answers[current] = value;
-  applyAnswer(current, value);
 
   const finishedType = QUESTIONS[current].kind === 'type';
   current += 1;
@@ -974,10 +1227,8 @@ function goBack(){
 }
 
 function showResultTeaser(){
-  let winner = 'A';
-  if(scores.A >= scores.B && scores.A >= scores.C) winner = 'A';
-  else if(scores.B >= scores.A && scores.B >= scores.C) winner = 'B';
-  else winner = 'C';
+  const typeResult = computeTypeResult();
+  const winner = typeResult.winner;
   currentWinner = winner;
 
   const r = RESULTS[winner];
@@ -986,9 +1237,8 @@ function showResultTeaser(){
   $('teaserSub').textContent = r.sub;
   $('lockPreviewText').textContent = r.lockPreview;
 
-  const typeTotal = QUESTIONS.filter(q=>q.kind==='type').length;
-  const ratio = scores[winner] / typeTotal;
-  $('teaserScoreNum').textContent = Math.round(ratio*100) + '%';
+  const ratio = typeResult.displayPercent / 100;
+  $('teaserScoreNum').textContent = Math.round(typeResult.displayPercent) + '%';
 
   ['Red','Yellow','Green'].forEach(c=> $('light'+c).className = 'light');
   const map = { red:'lightRed', yellow:'lightYellow', green:'lightGreen' };
@@ -1025,21 +1275,134 @@ function goToConsult(plan){
 
 const LEVEL_COLOR = { 1:'var(--red)', 2:'var(--yellow)', 3:'var(--green)' };
 const LEVEL_TEXT = { 1:'미흡', 2:'보통', 3:'우수' };
-const CHANNEL_LABEL = { pr:'PR/미디어', sns:'소셜미디어', community:'커뮤니티/플랫폼', review:'리뷰', wiki:'공개 정보 등재', schema:'웹사이트 정보 구조' };
+// 막대 채움 비율도 만점(100%)을 주지 않고 85%를 상한으로 둔다 (우수여도 칸이 꽉 차 보이지 않게)
+function levelToBarPercent(lvl){
+  return Math.min(85, lvl/3*100);
+}
+const CHANNEL_LABEL = { pr:'PR/미디어', sns:'소셜미디어', community:'커뮤니티/플랫폼', review:'리뷰', presence:'공개 정보 신뢰도' };
 // 채널별 약점이 CTA(정밀진단) 단계에서만 노출되는 대행사 차별화 메시지
 const CHANNEL_EDGE = {
   pr: "💡 PR/미디어는 저희가 직접 운영하는 언론사 <b>대한청년일보</b>를 통해 실제 기사화까지 가장 빠르게 진행할 수 있는 영역이에요.",
   sns: "💡 소셜미디어는 대행팀이 기획부터 제작·운영까지 전담해 콘텐츠 공백 없이 채워드릴 수 있는 영역이에요.",
   community: "💡 커뮤니티/플랫폼은 대행팀이 입점 전략과 채널별 최적화를 함께 설계해 확장 속도를 높여드릴 수 있어요.",
   review: "💡 리뷰는 대행팀의 관리 체계를 붙이면 가장 빠르게 신뢰 지표를 끌어올릴 수 있는 영역이에요.",
-  wiki: "💡 공개 정보 등재는 대행팀이 등록·정정 절차를 대신 진행해 빠르게 기본기를 채워드릴 수 있는 영역이에요.",
-  schema: "💡 웹사이트 정보 구조는 대행팀의 기술 파트너가 함께 세팅해드릴 수 있는 영역이에요.",
+  presence: "💡 공개 정보 신뢰도는 대행팀이 등재·정정과 웹사이트 구조화 작업을 함께 진행해 빠르게 기본기를 채워드릴 수 있는 영역이에요.",
 };
+
+// PART 2(채널) 진단 결과에서 가장 약한 채널에 따른 "지금 해야 할 일" — 객관적 실행 가이드, 아직 대행사 언급 없음
+const CHANNEL_ACTIONS = {
+  pr: {
+    title: "PR/미디어 노출부터 시작해야 해요",
+    short: "보도자료 정리 및 매체 컨택 시작하기",
+    steps: [
+      "최근 성과나 소식을 보도자료 형태로 정리해보세요",
+      "업종과 관련된 매체 1~2곳에 먼저 컨택해보세요",
+      "이미 있는 인터뷰·소개 자료가 있다면 한 곳에 모아두세요",
+    ]
+  },
+  sns: {
+    title: "소셜미디어 운영 루틴부터 만들어야 해요",
+    short: "핵심 채널 1개, 주 1회 업로드 루틴 만들기",
+    steps: [
+      "가장 반응이 좋은 채널 1개를 정해 주 1회 이상 올리는 루틴을 만들어보세요",
+      "오래된 게시물의 연락처·소개 정보가 최신인지 점검해보세요",
+      "직접 운영이 어렵다면 콘텐츠 주제만이라도 먼저 목록화해보세요",
+    ]
+  },
+  community: {
+    title: "공개 채널 비중부터 늘려야 해요",
+    short: "입점 가능한 플랫폼 확인 및 공개 채널 확대",
+    steps: [
+      "지금 입점 가능한 플랫폼이 있는지 확인해보세요",
+      "문의가 비공개 채널에 몰려있다면 자주 묻는 질문을 공개 페이지로 옮겨보세요",
+      "플랫폼마다 소개 문구가 다르다면 통일해보세요",
+    ]
+  },
+  review: {
+    title: "리뷰·후기 자산부터 쌓아야 해요",
+    short: "리뷰 요청 루틴 만들고 후기 한 곳에 모으기",
+    steps: [
+      "만족한 고객에게 리뷰를 직접 요청하는 루틴을 만들어보세요",
+      "흩어진 후기를 한 곳(홈페이지·블로그)에 모아보세요",
+      "좋은 후기 3~5개는 별도 사례로 정리해보세요",
+    ]
+  },
+  presence: {
+    title: "공개 정보의 정확성부터 확보해야 해요",
+    short: "기본 정보 통일 및 백과사전 등재 확인",
+    steps: [
+      "회사명·대표자·설립일 등 기본 정보를 한 곳에 정리해두세요",
+      "오픈된 백과사전(위키백과 등) 등재 여부를 확인해보세요",
+      "웹사이트에 기본 정보가 텍스트로 명확히 노출되어 있는지 점검해보세요",
+    ]
+  }
+};
+
+// PART 1(유형) 결과에 따라 위 액션이 "왜 지금 중요한지"를 설명하는 프레이밍 문장
+const TYPE_FRAMING = {
+  A: "이미 사업 기반은 탄탄한 상태라, 이 부분만 보강해도 비교적 빠르게 효과를 볼 수 있는 유형이에요.",
+  B: "콘텐츠와 활동은 어느 정도 쌓여있는 편이라, 이 부분을 채우면 지금까지 해온 것들이 훨씬 잘 드러날 유형이에요.",
+  C: "아직 기초 자산 자체가 부족한 단계라, 이 부분부터 순서대로 채워나가는 게 중요한 유형이에요.",
+};
+
+// PART 1(유형) + PART 2(채널 5개 전체)를 조합해 "종합 분석" 카드를 렌더링
+// 목적: 채널 하나만 급한 게 아니라, 여러 채널이 동시에 부족한 상태라는 걸 데이터 기반으로 보여준다
+function renderSynthesis(){
+  const ranked = Object.entries(channelState).sort((a,b)=>a[1]-b[1]); // 미흡(1) → 우수(3) 순, 가장 시급한 채널이 맨 앞
+  if(ranked.length === 0) return;
+
+  const r = RESULTS[currentWinner];
+  const gapCount = ranked.filter(([,lvl])=> lvl < 3).length; // 아직 '우수'에 도달하지 못한 채널 수
+
+  $('synthesisBadge').textContent = r.tag.split(' · ')[1] || r.tag;
+
+  $('synthesisTitle').textContent = gapCount > 0
+    ? '5개 채널 중 ' + gapCount + '곳에서 동시에 보완이 필요해요'
+    : '5개 채널 기본은 갖췄지만, 꾸준한 관리가 필요해요';
+
+  $('synthesisFraming').textContent =
+    TYPE_FRAMING[currentWinner] +
+    ' 다만 한 채널만 급한 게 아니라, 우선순위에 맞게 여러 채널을 함께 채워야 AI 검색 결과에서 실제로 달라지는 걸 체감할 수 있어요.';
+
+  // 상위 3개 채널을 우선순위 목록으로 (채널명 + 핵심 액션 한 줄)
+  const top3 = ranked.slice(0, 3);
+  const stepsEl = $('synthesisSteps');
+  stepsEl.innerHTML = '';
+  top3.forEach(([key])=>{
+    const li = document.createElement('li');
+    li.innerHTML = '<b>'+CHANNEL_LABEL[key]+'</b> — '+CHANNEL_ACTIONS[key].short;
+    stepsEl.appendChild(li);
+  });
+
+  // 나머지 채널도 함께 관리가 필요하다는 것을 짚어줌 (아래 전체 랭킹 리스트로 자연스럽게 연결)
+  const rest = ranked.slice(3).map(([key])=> CHANNEL_LABEL[key]);
+  const noteEl = $('synthesisNote');
+  if(rest.length > 0){
+    noteEl.textContent = '그 외 ' + rest.join(', ') + '도 순서대로 함께 관리가 필요해요.';
+    noteEl.style.display = '';
+  } else {
+    noteEl.style.display = 'none';
+  }
+
+  // 5개 채널 전체를 우선순위 순서로 나열 — "고칠 게 하나가 아니라 다섯"이라는 걸 다시 한번 시각적으로 보여줌
+  const rankWrap = $('synthesisRanked');
+  rankWrap.innerHTML = '';
+  ranked.forEach(([key, lvl], idx)=>{
+    const row = document.createElement('div');
+    row.className = 'rank-row' + (idx === 0 ? ' is-top' : '');
+    row.innerHTML =
+      '<div class="rank-num">'+(idx+1)+'</div>'+
+      '<div class="rank-name">'+CHANNEL_LABEL[key]+'</div>'+
+      '<div class="rank-note">'+CHANNEL_ACTIONS[key].short+'</div>'+
+      '<div class="rank-badge" style="background:'+LEVEL_COLOR[lvl]+';">'+LEVEL_TEXT[lvl]+'</div>';
+    rankWrap.appendChild(row);
+  });
+}
 
 function renderChannels(){
   channelState = computeChannelLevels();
 
-  ['pr','sns','community','review','wiki','schema'].forEach(key=>{
+  ['pr','sns','community','review','presence'].forEach(key=>{
     const lvl = channelState[key] || 1;
     const bar = $('bar-'+key);
     const badge = $('badge-'+key);
@@ -1047,7 +1410,7 @@ function renderChannels(){
     badge.textContent = LEVEL_TEXT[lvl];
     badge.style.background = LEVEL_COLOR[lvl];
     setTimeout(()=>{
-      bar.style.width = (lvl/3*100) + '%';
+      bar.style.width = levelToBarPercent(lvl) + '%';
       bar.style.background = LEVEL_COLOR[lvl];
     }, 60);
   });
@@ -1056,7 +1419,7 @@ function renderChannels(){
   const summary = $('channelSummary');
   if(weakest){
     // 진단표 단계에서는 채널명만 짚어주고, 해결 주체는 아직 드러내지 않음 (중립 유지)
-    summary.innerHTML = '6개 채널 중 가장 보강이 시급한 곳은 <b>'+CHANNEL_LABEL[weakest[0]]+'</b>이에요. 정밀 진단에서는 이 부분부터 구체적인 실행 전략을 제안해드려요.';
+    summary.innerHTML = '5개 채널 중 가장 보강이 시급한 곳은 <b>'+CHANNEL_LABEL[weakest[0]]+'</b>이에요. 정밀 진단에서는 이 부분부터 구체적인 실행 전략을 제안해드려요.';
 
     // 대행사 차별화 메시지는 CTA(정밀진단) 카드에서만 노출
     const edgeEl = $('premiumEdge');
@@ -1078,7 +1441,111 @@ function showResultFull(name){
   });
 
   renderChannels();
+  renderSynthesis();
 
+  showScreen('screen-result-full');
+}
+
+function formatDateKR(d){
+  return d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0');
+}
+
+// PART 1(유형 진단) + PART 2(채널 점검) 결과를 한 장짜리 보고서로 렌더링
+function renderReport(){
+  const r = RESULTS[currentWinner];
+
+  $('reportName').textContent = leadInfo.name || '고객';
+  $('reportDate').textContent = formatDateKR(new Date());
+  $('reportTypeTitle').textContent = r.title;
+  $('reportTypeSub').textContent = r.sub;
+  $('reportVerdict').textContent = r.signalVerdict;
+
+  ['Red','Yellow','Green'].forEach(c=> $('rLight'+c).className = 'r-light');
+  const map = { red:'rLightRed', yellow:'rLightYellow', green:'rLightGreen' };
+  $(map[r.signal]).classList.add('on-'+r.signal);
+
+  const ul = $('reportReasons');
+  ul.innerHTML = '';
+  r.reasons.forEach(reason=>{
+    const li = document.createElement('li');
+    li.innerHTML = '<span class="mark">＋</span><span>'+reason+'</span>';
+    ul.appendChild(li);
+  });
+
+  const chWrap = $('reportChannels');
+  chWrap.innerHTML = '';
+  ['pr','sns','community','review','presence'].forEach(key=>{
+    const lvl = channelState[key] || 1;
+    const row = document.createElement('div');
+    row.className = 'report-channel-row';
+    row.innerHTML =
+      '<div class="report-channel-name">'+CHANNEL_LABEL[key]+'</div>'+
+      '<div class="report-channel-track"><div class="report-channel-fill" style="width:'+levelToBarPercent(lvl)+'%; background:'+LEVEL_COLOR[lvl]+';"></div></div>'+
+      '<div class="report-channel-badge">'+LEVEL_TEXT[lvl]+'</div>';
+    chWrap.appendChild(row);
+  });
+
+  const weakest = Object.entries(channelState).sort((a,b)=>a[1]-b[1])[0];
+  if(weakest){
+    $('reportWeakest').innerHTML = '5개 채널 중 가장 보강이 시급한 곳은 <b>'+CHANNEL_LABEL[weakest[0]]+'</b>이에요. 정밀 진단에서는 이 부분부터 구체적인 실행 전략을 제안해드려요.';
+  }
+}
+
+// 보고서 버튼 클릭 시: 이 연락처로 이미 보고서를 받은 적 있는지 먼저 서버(구글시트)에 확인
+async function handleReportRequest(){
+  const btn = $('reportBtn');
+  const originalHTML = btn.innerHTML;
+  btn.disabled = true;
+  btn.textContent = '확인 중...';
+
+  const restoreBtn = ()=>{ btn.disabled = false; btn.innerHTML = originalHTML; };
+
+  // GAS_URL을 아직 설정하지 않은 테스트 단계에서는 제한 없이 바로 보여준다
+  if(GAS_URL.indexOf('PASTE_YOUR') === 0){
+    console.warn('GAS_URL이 설정되지 않아 1인 1회 제한이 동작하지 않습니다.');
+    restoreBtn();
+    showReport();
+    return;
+  }
+
+  try{
+    const checkUrl = GAS_URL + '?action=check&contact=' + encodeURIComponent(leadInfo.contact || '');
+    const res = await fetch(checkUrl);
+    const data = await res.json();
+    restoreBtn();
+
+    if(data && data.exists){
+      showScreen('screen-report-limit');
+    } else {
+      showReport();
+      logReportIssued();
+    }
+  } catch(err){
+    // 확인 자체가 실패한 경우(네트워크 오류 등)는 사용자 경험을 위해 우선 보고서를 보여준다
+    console.error('보고서 발급 이력 확인 중 오류:', err);
+    restoreBtn();
+    showReport();
+    logReportIssued();
+  }
+}
+
+// 보고서를 새로 발급했다는 사실을 구글시트에 기록 (응답을 읽을 필요 없어 no-cors로 전송)
+function logReportIssued(){
+  if(GAS_URL.indexOf('PASTE_YOUR') === 0) return;
+  const params = new URLSearchParams({
+    action: 'log_report',
+    name: leadInfo.name || '',
+    contact: leadInfo.contact || ''
+  });
+  fetch(GAS_URL, { method:'POST', mode:'no-cors', body: params }).catch(()=>{});
+}
+
+function showReport(){
+  renderReport();
+  showScreen('screen-report');
+}
+
+function backToResultFull(){
   showScreen('screen-result-full');
 }
 
