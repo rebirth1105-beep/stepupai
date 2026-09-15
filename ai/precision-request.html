@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정밀 진단 + 컨설팅 접수 | GEO Diagnosis</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#071533;
+    --blue:#276EF1;
+    --blue-light:#5B9CFF;
+    --green:#16C784;
+    --surface:#F8FAFD;
+    --white:#ffffff;
+    --border:#DCE4F1;
+    --muted:#61708A;
+    --grad-cta:linear-gradient(to right,#4F54F5,#086CFF);
+    --shadow-glow:0 18px 45px rgba(39,110,241,0.24);
+    --shadow-soft:0 12px 35px rgba(20,45,90,0.10);
+    --r-lg:24px;--r-md:16px;--r-btn:12px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{height:100%;}
+  body{
+    font-family:'Inter','Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--surface);color:var(--ink);min-height:100vh;line-height:1.6;
+    display:flex;align-items:center;justify-content:center;padding:24px;
+  }
+  .stage{
+    width:100%;max-width:580px;background:var(--white);border:1px solid var(--border);
+    border-radius:var(--r-lg);box-shadow:var(--shadow-soft);overflow:hidden;
+  }
+  .head{
+    padding:44px 36px 32px;text-align:center;color:var(--white);
+    background:radial-gradient(ellipse at top, rgba(39,110,241,0.32) 0%, rgba(7,21,51,0.95) 55%, #071533 100%);
+  }
+  .head .back-link{
+    display:inline-flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.6);
+    text-decoration:none;margin-bottom:22px;font-weight:600;
+  }
+  .head .back-link:hover{color:var(--white);}
+  .head .badge{
+    display:inline-block;font-size:11px;letter-spacing:.12em;color:var(--blue-light);
+    text-transform:uppercase;font-weight:800;margin-bottom:14px;
+  }
+  .head h1{font-size:23px;font-weight:900;margin-bottom:10px;line-height:1.4;}
+  .head p{font-size:13px;color:rgba(255,255,255,0.65);font-weight:500;max-width:400px;margin:0 auto;}
+
+  .price-note{
+    display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;
+    font-size:12px;font-weight:700;color:var(--white);background:rgba(39,110,241,0.2);
+    border:1px solid rgba(39,110,241,0.4);border-radius:20px;padding:8px 16px;display:inline-flex;
+  }
+
+  .compare-note{
+    margin:0 36px;margin-top:-1px;padding:16px 18px;background:#FFF8E8;border:1px solid #F5E3B3;
+    border-radius:var(--r-md);font-size:11.5px;font-weight:500;color:#7A5C00;line-height:1.7;
+    transform:translateY(-18px);
+  }
+  .compare-note b{font-weight:800;}
+
+  .body{padding:16px 36px 40px;}
+  form{display:flex;flex-direction:column;gap:16px;}
+  .field label{font-size:11.5px;color:var(--muted);margin-bottom:6px;display:block;font-weight:700;}
+  .field label .req{color:var(--blue);}
+  .field label .hint{font-weight:500;color:#A7B2C6;text-transform:none;letter-spacing:0;}
+  .field input, .field textarea{
+    width:100%;padding:14px 16px;border:1.5px solid var(--border);border-radius:var(--r-btn);
+    font-size:14px;font-family:inherit;font-weight:600;background:var(--surface);color:var(--ink);
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .field textarea{resize:vertical;min-height:80px;font-weight:500;}
+  .field input::placeholder, .field textarea::placeholder{color:#A7B2C6;font-weight:500;}
+  .field input:focus, .field textarea:focus{outline:none;border-color:var(--blue);background:var(--white);}
+
+  .channel-grid{display:flex;flex-direction:column;gap:8px;}
+  .channel-opt{
+    display:flex;align-items:center;gap:10px;padding:13px 14px;border:1.5px solid var(--border);
+    border-radius:var(--r-btn);cursor:pointer;transition:border-color .2s ease, background .2s ease;
+  }
+  .channel-opt:hover{border-color:var(--blue);}
+  .channel-opt.checked{border-color:var(--blue);background:#EAF2FF;}
+  .channel-opt input{width:16px;height:16px;accent-color:var(--blue);flex-shrink:0;}
+  .channel-opt .co-text{font-size:13.5px;font-weight:700;color:var(--ink);}
+  .channel-note{font-size:11px;color:var(--muted);font-weight:500;margin-top:4px;}
+
+  .consent{display:flex;align-items:flex-start;gap:10px;margin-top:4px;}
+  .consent input{width:16px;height:16px;margin-top:2px;accent-color:var(--blue);flex-shrink:0;}
+  .consent label{font-size:11.5px;color:var(--muted);font-weight:500;line-height:1.6;}
+
+  .submit-btn{
+    margin-top:8px;background:var(--grad-cta);color:var(--white);border:none;border-radius:var(--r-btn);
+    padding:16px 20px;font-size:14.5px;font-weight:800;cursor:pointer;box-shadow:var(--shadow-glow);
+    transition:transform .25s ease, opacity .2s ease;
+  }
+  .submit-btn:hover{transform:translateY(-2px);}
+  .submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+  .form-note{font-size:10.5px;color:#A7B2C6;text-align:center;margin-top:6px;font-weight:500;}
+
+  .success{display:none;padding:64px 36px;text-align:center;}
+  .success.active{display:block;}
+  .success .icon{
+    width:64px;height:64px;border-radius:50%;background:#E4FBF2;border:1px solid #C8F3E1;
+    display:flex;align-items:center;justify-content:center;margin:0 auto 22px;
+  }
+  .success h2{font-size:20px;font-weight:900;color:var(--ink);margin-bottom:10px;}
+  .success p{font-size:13.5px;color:var(--muted);font-weight:500;max-width:360px;margin:0 auto 26px;line-height:1.7;}
+  .success a{
+    display:inline-block;font-size:13px;font-weight:800;color:var(--blue);text-decoration:none;
+    border:1.5px solid var(--border);padding:12px 22px;border-radius:var(--r-btn);
+  }
+  .success a:hover{border-color:var(--blue);background:#EAF2FF;}
+
+  #formWrap.hidden{display:none;}
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="head">
+    <a href="index.html" class="back-link">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      진단표로 돌아가기
+    </a>
+    <div class="badge">Precision Diagnosis</div>
+    <h1>정밀 진단 + 컨설팅 접수</h1>
+    <p>실제 홈페이지 주소를 바탕으로 정확한 진단을 진행하고, 우선순위 채널에 맞는 실행 전략까지 함께 제안해드려요.</p>
+    <div class="price-note">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      컨설팅 비용: 시간당 10만원
+    </div>
+  </div>
+
+  <div class="compare-note">
+    💡 무료 테스트는 스스로 답한 내용을 바탕으로 한 <b>약식 진단</b>이에요. 정밀 진단은 <b>실제 홈페이지를 직접 확인</b>해서 진행하기 때문에 정확도가 달라요.
+  </div>
+
+  <div class="body" id="formWrap">
+    <form id="precisionForm" onsubmit="handleSubmit(event)">
+      <div class="field">
+        <label for="name">이름 / 상호명 <span class="req">*</span></label>
+        <input type="text" id="name" required placeholder="예: 홍길동 / OO스튜디오">
+      </div>
+      <div class="field">
+        <label for="contact">연락처 <span class="req">*</span></label>
+        <input type="text" id="contact" required placeholder="010-0000-0000">
+      </div>
+      <div class="field">
+        <label for="email">이메일</label>
+        <input type="email" id="email" placeholder="email@example.com">
+      </div>
+      <div class="field">
+        <label for="website">홈페이지 주소 <span class="req">*</span> <span class="hint">— 정밀 진단이 이루어지는 실제 대상</span></label>
+        <input type="url" id="website" required placeholder="https://...">
+      </div>
+
+      <div class="field">
+        <label>우선순위 채널 <span class="hint">— 먼저 보고 싶은 순서대로 최대 3개 선택</span></label>
+        <div class="channel-grid" id="channelGrid">
+          <label class="channel-opt"><input type="checkbox" value="PR/미디어" onchange="handleChannelChange(this)"><span class="co-text">PR / 미디어</span></label>
+          <label class="channel-opt"><input type="checkbox" value="소셜미디어" onchange="handleChannelChange(this)"><span class="co-text">소셜미디어</span></label>
+          <label class="channel-opt"><input type="checkbox" value="커뮤니티/플랫폼" onchange="handleChannelChange(this)"><span class="co-text">커뮤니티 / 플랫폼</span></label>
+          <label class="channel-opt"><input type="checkbox" value="리뷰" onchange="handleChannelChange(this)"><span class="co-text">리뷰</span></label>
+          <label class="channel-opt"><input type="checkbox" value="공개 정보 신뢰도" onchange="handleChannelChange(this)"><span class="co-text">공개 정보 신뢰도</span></label>
+        </div>
+        <div class="channel-note" id="channelNote">최대 3개까지 선택할 수 있어요.</div>
+      </div>
+
+      <div class="field">
+        <label for="schedule">희망 상담 일정</label>
+        <input type="text" id="schedule" placeholder="예: 평일 오후, 다음 주 화요일 등">
+      </div>
+      <div class="field">
+        <label for="message">문의 내용</label>
+        <textarea id="message" placeholder="현재 상황이나 궁금하신 점을 편하게 남겨주세요."></textarea>
+      </div>
+
+      <div class="consent">
+        <input type="checkbox" id="consent" required>
+        <label for="consent">개인정보 수집 및 이용, 유료 컨설팅 진행에 동의합니다. (상담 안내 목적, 상담 완료 후 파기)</label>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">정밀 진단 접수하기 →</button>
+      <div class="form-note">접수 후 영업일 기준 1~2일 내로 일정 조율을 위해 연락드려요.</div>
+    </form>
+  </div>
+
+  <div class="success" id="successWrap">
+    <div class="icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0E9E6E" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <h2>접수가 완료됐어요</h2>
+    <p>남겨주신 홈페이지를 검토한 뒤, 연락처로 영업일 기준 1~2일 내에 일정을 조율해드릴게요.</p>
+    <a href="index.html">진단표로 돌아가기</a>
+  </div>
+</div>
+
+<script>
+/* ⚠️ 설정 필수: consultation-form.html, index.html과 동일한 GAS_URL을 넣어야 저장됩니다. */
+const GAS_URL = "https://script.google.com/macros/s/AKfycbyPkGUbeGPOqyn6oPTZR6RA2TYJOJEgJ1EpUUHvniZaKvTL25ImquC9boQG5z0Ni-Zl/exec";
+
+const MAX_CHANNELS = 3;
+
+function handleChannelChange(checkbox){
+  const checked = document.querySelectorAll('#channelGrid input:checked');
+  if(checked.length > MAX_CHANNELS){
+    checkbox.checked = false;
+    document.getElementById('channelNote').textContent = '최대 3개까지만 선택할 수 있어요.';
+    document.getElementById('channelNote').style.color = '#C0483F';
+    return;
+  }
+  document.getElementById('channelNote').style.color = '';
+  document.getElementById('channelNote').textContent = checked.length + ' / ' + MAX_CHANNELS + '개 선택됨';
+  checkbox.closest('.channel-opt').classList.toggle('checked', checkbox.checked);
+}
+
+// URL 쿼리 파라미터로 진단 사이트에서 넘어온 정보 자동 채우기 (있는 경우)
+function prefillFromQuery(){
+  const q = new URLSearchParams(window.location.search);
+  if(q.get('name')) document.getElementById('name').value = q.get('name');
+  if(q.get('contact')) document.getElementById('contact').value = q.get('contact');
+  if(q.get('site')) document.getElementById('website').value = q.get('site');
+}
+
+function handleSubmit(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '전송 중...';
+
+  const selectedChannels = Array.from(document.querySelectorAll('#channelGrid input:checked'))
+    .map(el => el.value).join(', ');
+
+  const payload = new URLSearchParams({
+    action: 'log_precision',
+    name: document.getElementById('name').value,
+    contact: document.getElementById('contact').value,
+    email: document.getElementById('email').value,
+    website: document.getElementById('website').value,
+    channels: selectedChannels,
+    schedule: document.getElementById('schedule').value,
+    message: document.getElementById('message').value
+  });
+
+  if(GAS_URL.indexOf('PASTE_YOUR') === 0){
+    console.warn('GAS_URL이 설정되지 않았습니다. 아래 데이터가 실제로는 저장되지 않았어요:', Object.fromEntries(payload));
+    showSuccess();
+    return;
+  }
+
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: payload
+  })
+  .then(()=> showSuccess())
+  .catch(()=>{
+    console.error('정밀진단 접수 저장 중 오류가 발생했습니다.');
+    showSuccess();
+  });
+}
+
+function showSuccess(){
+  document.getElementById('formWrap').classList.add('hidden');
+  document.getElementById('successWrap').classList.add('active');
+}
+
+window.addEventListener('load', prefillFromQuery);
+</script>
+
+</body>
+</html>
