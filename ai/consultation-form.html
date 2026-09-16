@@ -127,11 +127,11 @@
 
   <div class="body" id="formWrap">
     <div class="plan-toggle">
-      <button type="button" class="plan-btn" id="planFreeBtn" onclick="selectPlan('free')">
+      <button type="button" class="plan-btn" id="planFreeBtn" onclick="handlePlanClick('free')">
         <div class="pt-name">FREE</div>
         <div class="pt-title">15분 무료 상담</div>
       </button>
-      <button type="button" class="plan-btn" id="planPremiumBtn" onclick="selectPlan('premium')">
+      <button type="button" class="plan-btn" id="planPremiumBtn" onclick="handlePlanClick('premium')">
         <div class="pt-name">PREMIUM</div>
         <div class="pt-title">정밀 진단 + 컨설팅</div>
       </button>
@@ -201,6 +201,20 @@ function selectPlan(plan){
   selectedPlan = plan;
   document.getElementById('planFreeBtn').classList.toggle('active', plan==='free');
   document.getElementById('planPremiumBtn').classList.toggle('active', plan==='premium');
+}
+
+// 탭을 실제로 클릭했을 때 호출 — PREMIUM은 이 페이지에 머무르지 않고 전용 접수 페이지로 이동
+function handlePlanClick(plan){
+  if(plan === 'premium'){
+    const params = new URLSearchParams({
+      name: document.getElementById('name').value || '',
+      contact: document.getElementById('contact').value || '',
+      site: document.getElementById('website').value || ''
+    });
+    window.location.href = 'precision-request.html?' + params.toString();
+    return;
+  }
+  selectPlan('free');
 }
 
 // URL 쿼리 파라미터로 진단 사이트에서 넘어온 정보 자동 채우기
