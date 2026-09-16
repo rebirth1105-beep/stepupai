@@ -1286,7 +1286,10 @@ function goToConsult(plan){
     plan: plan,
     resultType: currentWinner || ''
   });
-  window.location.href = 'consultation-form.html?' + params.toString();
+
+  // 정밀진단+컨설팅(유료)은 홈페이지 주소·우선순위채널·계좌 정보를 받는 전용 접수 페이지로 바로 연결
+  const target = (plan === 'premium') ? 'precision-request.html' : 'consultation-form.html';
+  window.location.href = target + '?' + params.toString();
 }
 
 const LEVEL_COLOR = { 1:'var(--red)', 2:'var(--yellow)', 3:'var(--green)' };
