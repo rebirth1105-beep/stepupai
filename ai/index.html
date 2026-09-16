@@ -481,6 +481,19 @@
   }
   .report-weakest b{color:var(--ink);font-weight:800;}
 
+  .report-synth-title{font-size:14.5px;font-weight:900;color:var(--ink);margin-bottom:6px;line-height:1.4;}
+  .report-synth-framing{font-size:11px;font-weight:500;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+  .report-synth-steps{list-style:none;counter-reset:rstep;display:flex;flex-direction:column;gap:6px;}
+  .report-synth-steps li{
+    counter-increment:rstep;position:relative;padding-left:22px;font-size:11px;font-weight:600;
+    color:#39435A;line-height:1.5;
+  }
+  .report-synth-steps li::before{
+    content:counter(rstep);position:absolute;left:0;top:1px;width:15px;height:15px;border-radius:50%;
+    background:var(--blue);color:var(--white);font-size:9px;font-weight:800;
+    display:flex;align-items:center;justify-content:center;
+  }
+
   .report-footer{margin-top:auto;padding-top:16px;border-top:1px solid var(--border);}
   .report-footer-text{font-size:9.5px;font-weight:500;color:var(--muted);line-height:1.6;margin-bottom:6px;}
   .report-footer-brand{font-size:9px;font-weight:800;letter-spacing:.1em;color:#A7B2C6;text-transform:uppercase;}
@@ -800,6 +813,15 @@
         <div class="report-part-label">PART 2 · 채널 점검</div>
         <div class="report-channels" id="reportChannels"></div>
         <div class="report-weakest" id="reportWeakest"></div>
+      </div>
+
+      <div class="report-divider"></div>
+
+      <div class="report-half">
+        <div class="report-part-label">종합 분석 · 우선순위 액션</div>
+        <div class="report-synth-title" id="reportSynthTitle"></div>
+        <p class="report-synth-framing" id="reportSynthFraming"></p>
+        <ol class="report-synth-steps" id="reportSynthSteps"></ol>
       </div>
 
       <div class="report-footer">
@@ -1507,6 +1529,25 @@ function renderReport(){
   const weakest = Object.entries(channelState).sort((a,b)=>a[1]-b[1])[0];
   if(weakest){
     $('reportWeakest').innerHTML = '5개 채널 중 가장 보강이 시급한 곳은 <b>'+CHANNEL_LABEL[weakest[0]]+'</b>이에요. 정밀 진단에서는 이 부분부터 구체적인 실행 전략을 제안해드려요.';
+  }
+
+  // 종합 분석(웹 화면의 renderSynthesis와 동일한 데이터를 보고서용으로 축약해서 재사용)
+  const ranked = Object.entries(channelState).sort((a,b)=>a[1]-b[1]);
+  if(ranked.length > 0){
+    const gapCount = ranked.filter(([,lvl])=> lvl < 3).length;
+    $('reportSynthTitle').textContent = gapCount > 0
+      ? '5개 채널 중 ' + gapCount + '곳에서 동시에 보완이 필요해요'
+      : '5개 채널 기본은 갖췄지만, 꾸준한 관리가 필요해요';
+    $('reportSynthFraming').textContent = TYPE_FRAMING[currentWinner];
+
+    const top3 = ranked.slice(0, 3);
+    const stepsEl = $('reportSynthSteps');
+    stepsEl.innerHTML = '';
+    top3.forEach(([key])=>{
+      const li = document.createElement('li');
+      li.innerHTML = '<b>'+CHANNEL_LABEL[key]+'</b> — '+CHANNEL_ACTIONS[key].short;
+      stepsEl.appendChild(li);
+    });
   }
 }
 
