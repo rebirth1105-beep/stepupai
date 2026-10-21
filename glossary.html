@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GEO 용어집 | 스텝업 by AI</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="GEO, AEO, LLMO, AI 검색, 엔티티, 구조화 데이터까지. AI 검색 시대에 브랜드가 알아야 할 용어를 스텝업컴퍼니가 정리했습니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 홈페이지와 같은 다크 캔버스. 왼쪽 고정 목차(분류) + 오른쪽 용어 사전 목록, 상단에 검색과 PDF 받기 */
+:root{
+  --bg:#03050C;--bg-2:#080B16;--bg-3:#0D1222;
+  --line:#1A2036;--line-2:#262E4A;
+  --fg:#ECEFF6;--dim:#A4ABBF;--mute:#6B7390;
+  --blue:#5B9CFE;--cyan:#7FE3F2;--go:#4ADE9A;--warn:#FFC266;
+  --font-sans:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --font-mono:'Geist Mono',ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+  --wrap:1120px;
+  color-scheme:dark;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-sans);font-size:15px;line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+h1,h2,h3{margin:0;text-wrap:balance;letter-spacing:-.025em;line-height:1.3}
+p{margin:0}
+[hidden]{display:none!important}
+.mono{font-family:var(--font-mono)}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{font-weight:900;font-size:16px;letter-spacing:-.02em;display:inline-flex;align-items:baseline;gap:.3em}
+.brand i{font-family:var(--font-mono);font-size:.62em;font-weight:400;color:var(--mute)}
+.back{font-size:13.5px;color:var(--dim)}
+.back:hover{color:var(--fg)}
+
+.hero{padding-block:clamp(40px,7vw,72px) 28px;display:grid;gap:14px}
+.kicker{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.14em;color:var(--blue);text-transform:uppercase}
+.hero h1{font-size:clamp(30px,4.4vw,46px);font-weight:900}
+.hero p{color:var(--dim);max-width:600px}
+.tools{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:16px;align-items:stretch;padding-bottom:28px;border-bottom:1px solid var(--line)}
+@media (max-width:860px){.tools{grid-template-columns:1fr}}
+.search{display:grid;gap:10px;align-content:start}
+.search label{font-size:13px;color:var(--dim)}
+.search input{width:100%;font:inherit;font-size:15px;color:var(--fg);background:var(--bg-2);border:1px solid var(--line-2);border-radius:12px;padding:13px 16px}
+.search input::placeholder{color:var(--mute)}
+.search input:focus{outline:none;border-color:var(--blue)}
+.cats{display:flex;flex-wrap:wrap;gap:8px}
+.cat{appearance:none;font:inherit;font-size:13px;color:var(--dim);background:transparent;border:1px solid var(--line-2);border-radius:999px;padding:6px 13px;cursor:pointer}
+.cat small{font-family:var(--font-mono);font-size:10.5px;color:var(--mute);margin-left:4px}
+.cat:hover{color:var(--fg)}
+.cat[aria-pressed="true"]{color:var(--fg);border-color:var(--blue);background:color-mix(in srgb,var(--blue) 12%,transparent)}
+
+.pdf{border:1px solid color-mix(in srgb,var(--cyan) 50%,transparent);border-radius:16px;padding:18px 20px;background:linear-gradient(135deg,color-mix(in srgb,var(--cyan) 10%,var(--bg-2)),var(--bg-2));display:grid;gap:10px;scroll-margin-top:80px}
+.pdf h2{font-size:16px;font-weight:900}
+.pdf p{font-size:13px;color:var(--dim)}
+.pdf form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.pdf input[type=email]{width:100%;min-width:0;font:inherit;font-size:14px;color:var(--fg);background:var(--bg);border:1px solid var(--line-2);border-radius:10px;padding:10px 12px}
+.pdf input[type=email]:focus{outline:none;border-color:var(--cyan)}
+.pdf button{appearance:none;font:inherit;font-size:14px;font-weight:700;color:var(--bg);background:var(--cyan);border:0;border-radius:10px;padding:10px 16px;cursor:pointer;white-space:nowrap}
+.pdf button:hover{background:var(--fg)}
+.agree{grid-column:1/-1;display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--mute)}
+.agree input{margin-top:3px;accent-color:var(--cyan)}
+.msg{grid-column:1/-1;font-size:12.5px;color:var(--dim);border-left:2px solid var(--cyan);padding-left:10px}
+
+.body{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;padding-block:32px 72px}
+@media (max-width:860px){.body{grid-template-columns:1fr}.toc{display:none}}
+.toc{position:sticky;top:84px;align-self:start;display:grid;gap:4px}
+.toc span{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;color:var(--mute);margin-bottom:6px}
+.toc a{font-size:14px;color:var(--dim);padding:5px 0;border-left:2px solid transparent;padding-left:12px}
+.toc a:hover{color:var(--fg);border-left-color:var(--blue)}
+.group{display:grid;gap:0;scroll-margin-top:84px}
+.group+.group{margin-top:40px}
+.group h2{font-size:13px;font-family:var(--font-mono);font-weight:500;letter-spacing:.12em;color:var(--blue);padding-bottom:10px;border-bottom:1px solid var(--line-2)}
+dl{margin:0}
+.term{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:6px 28px;padding:18px 0;border-bottom:1px solid var(--line);scroll-margin-top:84px}
+@media (max-width:640px){.term{grid-template-columns:1fr}}
+.term dt{font-size:17px;font-weight:900;letter-spacing:-.02em;display:grid;gap:2px;align-content:start}
+.term dt small{font-family:var(--font-mono);font-weight:400;font-size:11.5px;letter-spacing:.02em;color:var(--mute)}
+.term dd{margin:0;color:var(--dim);font-size:14.5px;line-height:1.75;max-width:62ch}
+.term:target dt{color:var(--cyan)}
+.empty{padding:28px 0;color:var(--mute)}
+.cta{margin-top:48px;border:1px solid var(--line-2);border-radius:18px;padding:24px;background:var(--bg-2);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.cta p{font-size:16px;font-weight:700}
+.cta a{font-size:14px;font-weight:700;color:var(--bg);background:var(--blue);border-radius:999px;padding:11px 20px}
+.cta a:hover{background:var(--cyan)}
+footer{border-top:1px solid var(--line);padding-block:28px;font-size:12.5px;color:var(--mute)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"DefinedTermSet","name":"GEO 용어집","inLanguage":"ko","publisher":{"@type":"Organization","name":"스텝업컴퍼니"}}</script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">스텝업<i>by</i>AI</a>
+    <a class="back" href="index.html">← 홈으로</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="kicker">GEO Glossary</span>
+    <h1>GEO 용어집</h1>
+    <p>AI 검색 시대에 브랜드가 알아야 할 용어를 짧고 정확하게 정리했습니다. 처음 듣는 말이 나오면 여기서 찾아보세요.</p>
+  </section>
+
+  <div class="tools">
+    <div class="search">
+      <label for="q">용어 검색</label>
+      <input id="q" type="search" placeholder="예: GEO, 엔티티, 구조화 데이터" autocomplete="off">
+      <div class="cats" id="cats" role="group" aria-label="분류"></div>
+    </div>
+    <aside class="pdf" id="pdf">
+      <h2>PDF로 받아보기</h2>
+      <p>이메일을 남겨주시면 전체 용어집 PDF를 보내드립니다.</p>
+      <form id="pdf-form" novalidate>
+        <input id="pdf-email" type="email" placeholder="이메일 주소" autocomplete="email" required>
+        <button type="submit">받기</button>
+        <label class="agree" for="pdf-agree"><input id="pdf-agree" type="checkbox">용어집 발송과 GEO 소식 안내를 위한 이메일 수집·이용에 동의합니다.</label>
+        <p class="msg" id="pdf-msg" hidden></p>
+      </form>
+    </aside>
+  </div>
+
+  <div class="body">
+    <nav class="toc" aria-label="분류 목차" id="toc"><span>CONTENTS</span></nav>
+    <div id="list">
+
+      <section class="group" id="basics" data-cat="기본 개념">
+        <h2>기본 개념</h2>
+        <dl>
+          <div class="term" id="geo"><dt>GEO<small>Generative Engine Optimization</small></dt><dd>생성형 AI가 답변을 만들 때 브랜드가 정확하게 언급되고 추천되도록 정보와 출처를 최적화하는 일입니다.</dd></div>
+          <div class="term" id="aeo"><dt>AEO<small>Answer Engine Optimization</small></dt><dd>질문에 바로 답하는 형태로 콘텐츠를 구성해, 답변 엔진이 그대로 인용하기 쉽게 만드는 일입니다.</dd></div>
+          <div class="term" id="seo"><dt>SEO<small>Search Engine Optimization</small></dt><dd>검색 결과 페이지에서 웹페이지가 더 높은 순위에 올라 클릭을 받도록 최적화하는 일입니다. 사이트 구조, 콘텐츠 품질, 블로그·언론 보도 같은 외부 출처와 링크까지 기반은 GEO와 상당 부분 겹칩니다. 다른 점은 SEO가 순위와 클릭을, GEO가 AI 답변 속 언급과 인용을 목표로 한다는 것입니다.</dd></div>
+          <div class="term" id="llmo"><dt>LLMO<small>LLM Optimization</small></dt><dd>대규모 언어모델이 브랜드를 올바르게 이해하고 설명하도록 정보를 일관되게 정리하는 일입니다.</dd></div>
+          <div class="term" id="ai-search"><dt>AI 검색<small>AI Search</small></dt><dd>AI가 여러 출처를 읽고 요약해 하나의 답으로 보여주는 검색 방식입니다. 링크 목록 대신 답이 먼저 나옵니다.</dd></div>
+          <div class="term" id="gen-ai"><dt>생성형 AI<small>Generative AI</small></dt><dd>학습한 데이터를 바탕으로 글, 이미지 같은 새로운 결과물을 만들어내는 AI입니다. ChatGPT, Gemini, Claude가 대표적입니다.</dd></div>
+          <div class="term" id="llm"><dt>LLM<small>Large Language Model</small></dt><dd>방대한 텍스트로 학습해 사람의 언어를 이해하고 만들어내는 AI 모델입니다. 생성형 AI 서비스의 엔진 역할을 합니다.</dd></div>
+          <div class="term" id="hallucination"><dt>할루시네이션<small>Hallucination</small></dt><dd>AI가 사실이 아닌 내용을 그럴듯하게 만들어내는 현상입니다. 브랜드 정보가 부족하거나 출처마다 다르면 AI가 우리 회사를 잘못 설명할 위험이 커집니다.</dd></div>
+        </dl>
+      </section>
+
+      <section class="group" id="engines" data-cat="AI 검색 서비스">
+        <h2>AI 검색 서비스</h2>
+        <dl>
+          <div class="term" id="ai-overviews"><dt>구글 AI 개요<small>AI Overviews</small></dt><dd>구글 검색 결과 맨 위에 AI가 요약한 답을 먼저 보여주는 기능입니다.</dd></div>
+          <div class="term" id="ai-mode"><dt>구글 AI 모드<small>AI Mode</small></dt><dd>구글 검색 안에서 대화하듯 질문을 이어가며 AI 답변을 받는 검색 모드입니다. 답변 옆에 근거가 된 사이트가 함께 표시됩니다.</dd></div>
+          <div class="term" id="naver-briefing"><dt>네이버 AI 브리핑<small>Naver AI Briefing</small></dt><dd>네이버 검색에서 여러 문서를 요약해 답을 먼저 보여주는 AI 기능입니다.</dd></div>
+          <div class="term" id="zero-click"><dt>제로 클릭 검색<small>Zero-click Search</small></dt><dd>검색한 사람이 결과 링크를 누르지 않고, 결과 화면의 요약만 보고 검색을 끝내는 현상입니다. AI 답변 안에 들어가야 하는 이유이기도 합니다.</dd></div>
+          <div class="term" id="rag"><dt>RAG<small>Retrieval-Augmented Generation</small></dt><dd>AI가 답하기 전에 외부 문서를 찾아 읽고, 그 내용을 근거로 답을 만드는 방식입니다. AI 검색이 출처 링크를 함께 보여주는 이유입니다.</dd></div>
+        </dl>
+      </section>
+
+      <section class="group" id="trust" data-cat="신뢰·출처">
+        <h2>신뢰 · 출처</h2>
+        <dl>
+          <div class="term" id="entity"><dt>엔티티<small>Entity</small></dt><dd>검색엔진과 AI가 하나의 대상으로 인식하는 기업, 인물, 제품입니다. 이름·주소·설명이 출처마다 일치해야 같은 대상으로 묶입니다.</dd></div>
+          <div class="term" id="knowledge-graph"><dt>지식 그래프<small>Knowledge Graph</small></dt><dd>검색엔진이 사람, 기업, 장소 같은 대상과 그 사이의 관계를 정리해 둔 데이터베이스입니다.</dd></div>
+          <div class="term" id="eeat"><dt>E-E-A-T<small>Experience · Expertise · Authoritativeness · Trustworthiness</small></dt><dd>경험, 전문성, 권위, 신뢰를 뜻합니다. 구글이 콘텐츠의 품질을 평가할 때 보는 기준입니다.</dd></div>
+          <div class="term" id="citation"><dt>인용 출처<small>Citation</small></dt><dd>AI가 답변의 근거로 연결한 웹페이지, 기사, 문서입니다. 우리 홈페이지와 기사가 인용 출처에 들어가는 것이 GEO의 핵심 목표입니다.</dd></div>
+          <div class="term" id="digital-pr"><dt>디지털 PR<small>Digital PR</small></dt><dd>언론 보도, 인터뷰, 기고처럼 신뢰할 수 있는 외부 매체에 브랜드 이야기를 싣는 활동입니다.</dd></div>
+          <div class="term" id="press-release"><dt>보도자료<small>Press Release</small></dt><dd>기업이 언론에 배포하는 공식 발표문입니다. 기사로 실리면 AI가 확인할 수 있는 공개 기록이 됩니다.</dd></div>
+          <div class="term" id="nap"><dt>NAP 일관성<small>Name · Address · Phone</small></dt><dd>상호, 주소, 전화번호가 홈페이지와 지도, 플랫폼 등 모든 채널에서 똑같이 표기된 상태입니다.</dd></div>
+          <div class="term" id="gbp"><dt>구글 비즈니스 프로필<small>Google Business Profile</small></dt><dd>구글 검색과 지도에 표시되는 업체 정보 페이지입니다. 영업시간, 위치, 리뷰가 함께 노출됩니다.</dd></div>
+        </dl>
+      </section>
+
+      <section class="group" id="measure" data-cat="측정">
+        <h2>측정</h2>
+        <dl>
+          <div class="term" id="mention-rate"><dt>언급률<small>Mention Rate</small></dt><dd>목표 질문 가운데 AI 답변에 우리 브랜드가 등장한 질문의 비율입니다.</dd></div>
+          <div class="term" id="position"><dt>추천 순위<small>Position</small></dt><dd>AI 답변 속 브랜드 목록에서 우리 브랜드가 놓인 위치입니다.</dd></div>
+          <div class="term" id="sov"><dt>경쟁 점유<small>Share of Voice</small></dt><dd>같은 질문에서 우리 브랜드와 경쟁사가 각각 언급되는 비중입니다.</dd></div>
+          <div class="term" id="prompt-set"><dt>질문 세트<small>Prompt Set</small></dt><dd>고객이 AI에게 실제로 물을 법한 질문을 모아, 같은 기준으로 반복 측정하는 데 쓰는 목록입니다.</dd></div>
+          <div class="term" id="branded-search"><dt>브랜드 검색량<small>Branded Search Volume</small></dt><dd>사람들이 브랜드 이름을 직접 검색한 횟수입니다. 브랜드가 얼마나 알려졌는지 보여줍니다.</dd></div>
+        </dl>
+      </section>
+
+      <section class="group" id="tech" data-cat="기술">
+        <h2>기술</h2>
+        <dl>
+          <div class="term" id="structured-data"><dt>구조화 데이터<small>Structured Data · Schema.org</small></dt><dd>업체명, 주소, 가격, 질문과 답 같은 페이지 내용을 검색엔진이 읽기 쉬운 정해진 형식으로 표시한 코드입니다. 보통 Schema.org 형식을 씁니다.</dd></div>
+          <div class="term" id="faq-schema"><dt>FAQ 스키마<small>FAQPage Schema</small></dt><dd>자주 묻는 질문과 답을 구조화 데이터로 표시해, 검색엔진이 질문과 답의 짝으로 이해하게 하는 방법입니다.</dd></div>
+          <div class="term" id="ai-crawler"><dt>AI 크롤러<small>AI Crawler</small></dt><dd>AI 회사가 웹페이지를 수집하려고 보내는 프로그램입니다. OpenAI의 GPTBot이 대표적입니다.</dd></div>
+          <div class="term" id="robots"><dt>robots.txt<small>Robots Exclusion</small></dt><dd>사이트의 어떤 페이지를 크롤러가 수집해도 되는지 알려주는 파일입니다. 잘못 설정하면 AI가 사이트를 아예 읽지 못합니다.</dd></div>
+          <div class="term" id="llms-txt"><dt>llms.txt<small>Proposed Standard</small></dt><dd>사이트의 핵심 정보를 AI가 읽기 쉽게 정리해 두자는 취지로 제안된 텍스트 파일 형식입니다. 아직 공식 표준은 아닙니다.</dd></div>
+        </dl>
+      </section>
+
+      <p class="empty" id="empty" hidden>찾는 용어가 없습니다. 다른 단어로 검색해 보세요.</p>
+
+      <div class="cta">
+        <p>우리 브랜드는 AI에게 어떻게 보일까요?</p>
+        <a href="index.html#diagnose">무료 GEO 진단 받기 →</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 스텝업컴퍼니 · 스텝업 by AI</div>
+</footer>
+
+<script>
+(()=>{
+  const groups=[...document.querySelectorAll('.group')];
+  const terms=[...document.querySelectorAll('.term')];
+  const cats=document.getElementById('cats'),toc=document.getElementById('toc'),q=document.getElementById('q'),empty=document.getElementById('empty');
+  let cur='전체';
+  const mk=(label,n)=>{const b=document.createElement('button');b.type='button';b.className='cat';b.setAttribute('aria-pressed',label===cur);b.innerHTML=label+'<small>'+n+'</small>';b.onclick=()=>{cur=label;[...cats.children].forEach(c=>c.setAttribute('aria-pressed',c===b));apply()};cats.appendChild(b)};
+  mk('전체',terms.length);
+  groups.forEach(g=>{mk(g.dataset.cat,g.querySelectorAll('.term').length);const a=document.createElement('a');a.href='#'+g.id;a.textContent=g.querySelector('h2').textContent;toc.appendChild(a)});
+  function apply(){
+    const k=q.value.trim().toLowerCase();let shown=0;
+    groups.forEach(g=>{
+      const inCat=cur==='전체'||g.dataset.cat===cur;let n=0;
+      g.querySelectorAll('.term').forEach(t=>{const ok=inCat&&(!k||t.textContent.toLowerCase().includes(k));t.hidden=!ok;if(ok)n++});
+      g.hidden=n===0;shown+=n;
+    });
+    empty.hidden=shown>0;
+  }
+  q.addEventListener('input',apply);
+
+  // PDF 받기: 이메일 접수 주소(구글 시트 등)를 연결하면 ENDPOINT에 넣는다
+  const ENDPOINT='';
+  document.getElementById('pdf-form').addEventListener('submit',async e=>{
+    e.preventDefault();
+    const email=document.getElementById('pdf-email').value.trim(),agree=document.getElementById('pdf-agree').checked,m=document.getElementById('pdf-msg');
+    m.hidden=false;
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){m.textContent='이메일 주소를 확인해 주세요.';return}
+    if(!agree){m.textContent='이메일 수집·이용에 동의해 주세요.';return}
+    if(!ENDPOINT){m.textContent='온라인 접수는 연결 준비 중입니다. 잠시 후 다시 이용해 주세요.';return}
+    try{await fetch(ENDPOINT,{method:'POST',mode:'no-cors',body:new URLSearchParams({type:'glossary',email})});m.textContent='접수되었습니다. 입력하신 이메일로 용어집 PDF를 보내드립니다.'}
+    catch(_){m.textContent='접수 중 문제가 생겼습니다. 잠시 후 다시 시도해 주세요.'}
+  });
+})();
+</script>
+</body>
+</html>
