@@ -1616,6 +1616,13 @@ function restartQuiz(){
 }
 
 window.addEventListener('load', ()=>{
+  // 홈페이지에서 1번 문항 답을 넘겨받으면(?q1=A|B|C) 인트로를 건너뛰고 2번 문항부터 이어서 시작
+  const q1 = new URLSearchParams(location.search).get('q1');
+  if(q1 && QUESTIONS[0].options.some(o=>o.value===q1)){
+    startQuiz();
+    selectOption(q1);
+    return;
+  }
   setTimeout(()=> setGauge($('introGaugeFg'), 0.72), 300);
 });
 </script>
