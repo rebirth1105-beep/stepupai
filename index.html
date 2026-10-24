@@ -1178,6 +1178,10 @@ a.st:hover .get i{color:var(--cyan)}
 /* 그래도 넘치는 화면은 스냅을 풀어 자연스럽게 스크롤 */
 html.loose{scroll-snap-type:y proximity}
 html.loose main>section{scroll-snap-stop:normal}
+/* 팀 사진: 축소한 주은숙·김민승 사진의 얼굴 위치를 서진욱 사진과 맞춤 */
+@media (max-width:980px){.photo{aspect-ratio:1/1}.photo img{object-position:center 20%}.photo img[src$="ju.jpg"]{object-position:center 82%}.photo img[src$="kim.jpg"]{object-position:center 66%}}
+.series img[src$="ju.jpg"],.series img[src$="kim.jpg"]{object-position:center bottom}
+@media (min-width:981px){.photo img[src$="ju.jpg"]{object-position:center 36%}.photo img[src$="kim.jpg"]{object-position:center 32%}}
 </style>
 
 <script>document.documentElement.classList.add("js")</script>
