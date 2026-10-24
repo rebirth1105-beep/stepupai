@@ -1038,6 +1038,133 @@ a.st:hover .get i{color:var(--cyan)}
 .press-body.one .logo-row div{grid-template-columns:1fr;gap:8px;align-content:start}
 @media (max-width:900px){.press-body.one .logo-row{grid-template-columns:1fr}.press-body.one .logo-row div{grid-template-columns:120px 1fr}}
 @media (prefers-reduced-motion:reduce){.steps3 .pn{background:var(--blue);color:var(--bg);border-color:var(--blue)}}
+/* 노트북 화면 정리 (2026-10-24) */
+/* FAQ: 넓은 화면은 2단 */
+@media (min-width:901px){
+  .faq{max-width:none;columns:2;column-gap:48px;border-top:0}
+  .faq details{break-inside:avoid;border-top:1px solid var(--line);border-bottom:0}
+  .faq summary{padding:16px 0;font-size:15.5px}
+}
+/* 세로가 짧은 노트북: 한 화면에 들어가도록 촘촘하게 */
+@media (min-width:901px) and (max-height:1100px){
+  main>section{padding-block:clamp(16px,3vh,36px)}
+  .s-head{gap:6px}
+  .s-head h2{font-size:clamp(20px,4vh,30px)}
+  .s-head p{font-size:14px;line-height:1.6}
+  .shift,.probs,.svc3,.measure,.reasons,.authors,.gloss-grid,.case-block,.ind,.press,.stairs-wrap,.org,.team,.faq,.cta-grid,.dash,.stat-box{margin-top:clamp(12px,2.4vh,24px)}
+  /* hero */
+  .hero{padding-top:clamp(12px,2vh,28px)}
+  .hero-copy{gap:12px}
+  .hero h1{font-size:clamp(26px,5.4vh,42px)}
+  .shift-panel{padding:18px 22px;gap:10px}
+  .stat-list li{padding:8px 0}
+  .stat-list b{font-size:clamp(24px,4.4vh,34px)}
+  .strip{margin-top:clamp(12px,2.5vh,32px)}
+  .steps3 a{padding-block:10px}
+  /* trust */
+  .press-top{padding-block:12px}
+  .press-stats div{padding-block:10px}
+  .ivs{padding-block:12px;gap:10px}
+  .iv img{aspect-ratio:21/9}
+  .iv-t{font-size:13px}
+  .logos{padding-block:12px;gap:8px}
+  .logo-row div{padding:8px 12px}
+  .src{padding-block:8px}
+  /* case */
+  .case-h{padding-block:14px}
+  .case-block .iv-grid{padding-block:14px}
+  /* dashboard */
+  #dashboard .s-head p,#dashboard .chips{display:none}
+  .kpi{padding-block:8px}
+  .pnl{padding-block:10px;gap:8px}
+  .bars{gap:7px}
+  #line{max-height:15vh}
+  .qrow{padding-block:5px}
+  /* team */
+  .photo{aspect-ratio:21/9!important}
+  .pbody{margin-top:-20px;gap:6px;padding-bottom:14px}
+  .person h4{font-size:20px}
+  .bio{font-size:13px;line-height:1.55}
+  .cv{padding-top:8px;gap:3px;font-size:12.5px}
+  .book{padding:8px}
+  .book img{width:40px}
+  /* 나머지 */
+  .reason,.prob{padding:18px 20px}
+  .s3{padding:18px;gap:8px}
+  .st{padding:12px}
+  .author .col{padding-block:9px}
+  .gloss-grid>div{padding:16px;gap:6px}
+  .pane{padding:18px;gap:12px}
+  form.diag{padding:18px;gap:10px}
+  .field input,.field select,.field textarea{padding-block:9px}
+}
+@media (min-width:901px) and (max-height:1100px){
+  /* trust: 기사 썸네일 낮게, 하단 경험 로고 한 줄 */
+  #trust .iv img{aspect-ratio:12/5}
+  .iv-grid{gap:12px}
+  .iv{gap:4px}
+  .logos h4{display:none}
+  .logo-row div{grid-template-columns:96px 1fr;gap:10px}
+  .press-top p{font-size:13.5px}
+  /* case: 근거 칩·구분선 정리, AI 화면 촘촘하게 */
+  .s-head.fact{margin-bottom:clamp(10px,2vh,20px)}
+  #case .why-chips{display:none}
+  .cs{padding-top:clamp(10px,2vh,20px)}
+  .cs-tabs{padding-block:8px}
+  .cs-body{padding:12px 16px;gap:8px;line-height:1.55}
+  .cs-list{gap:6px}
+  .cs-list li{padding:7px 10px}
+  .cs-ai figcaption{padding-block:7px}
+  .cs-copy{gap:10px}
+  .cs-copy>p{font-size:14px}
+  /* why geo: 카드 안쪽 촘촘하게 */
+  .pain{padding:16px;gap:10px}
+  .pq{padding:9px 13px;font-size:15px}
+  .mock{padding:10px;gap:7px}
+  .mock-list li{padding:4px 10px}
+  .cause{padding-top:8px}
+  .cause p{font-size:13px;line-height:1.5}
+  .fix{padding:5px 12px}
+}
+@media (min-width:901px) and (max-height:1100px){
+  /* trust 추가 */
+  .press-stats div{padding-block:8px;gap:2px}
+  .press-stats .big b{font-size:clamp(26px,4.6vh,40px)}
+  .iv-t{-webkit-line-clamp:1}
+  .logos{padding-block:10px}
+  .logo-row{grid-template-columns:repeat(3,1fr)}
+  .logo-row div{padding:6px 12px;display:flex;align-items:center;gap:10px}
+  .logo-row img{height:18px}
+  .logo-row span{font-size:12.5px;line-height:1.4}
+  /* dashboard 추가 */
+  #dashboard .metric-chips{display:none}
+  #dashboard .dash{margin-top:clamp(10px,2vh,20px)!important}
+  .dash-top{padding-block:8px}
+  .kpi{gap:0}
+  .bars{gap:4px}
+  .bar{line-height:1.4}
+  .qtable .pnl-h{padding-bottom:2px}
+  .qrow{padding-block:4px;font-size:13.5px}
+}
+/* 더 짧은 화면: 보조 정보 접기 */
+@media (min-width:901px) and (max-height:780px){
+  #trust .logos,#trust .src{display:none}
+  #trust .press-top p{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+  .qrow:last-child{display:none}
+  .kpi em small{display:none}
+  .hero h1{font-size:clamp(24px,5vh,38px)}
+  .s-head p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .pq{font-size:14px}
+  .s3 ul{gap:4px;padding-top:8px}
+}
+@media (min-width:901px) and (max-height:780px){
+  main>section{padding-block:clamp(10px,2vh,22px)}
+  .pnl{padding-block:8px;gap:6px}
+  .kpi{padding-block:6px}
+}
+/* 그래도 넘치는 화면은 스냅을 풀어 자연스럽게 스크롤 */
+html.loose{scroll-snap-type:y proximity}
+html.loose main>section{scroll-snap-stop:normal}
 </style>
 
 <script>document.documentElement.classList.add("js")</script>
@@ -1443,7 +1570,7 @@ a.st:hover .get i{color:var(--cyan)}
   <section id="about" data-label="About">
     <div class="wrap">
       <div class="s-head">
-        <span class="kicker"><b>09</b>About · Why StepUp · Team</span>
+        <span class="kicker"><b>09</b>About · Why StepUp</span>
         <h2>AI 시대의 통합 마케팅 회사,<br>스텝업컴퍼니입니다.</h2>
         <p>고객이 AI에게 묻는 시대, 브랜드가 발견되고 확인되고 신뢰받아 선택되기까지. 그 과정을 처음부터 끝까지 한 팀에서 설계하고 실행합니다.</p>
       </div>
@@ -1452,7 +1579,15 @@ a.st:hover .get i{color:var(--cyan)}
         <div class="reason"><span class="n">02</span><h3>언론사가 팀 안에 있습니다</h3><p>AI가 신뢰하는 기사를 외주가 아닌 팀에서 직접 기획하고 발행합니다. 그리고 매달 같은 기준으로 효과를 확인합니다.</p></div>
         <div class="reason"><span class="n">03</span><h3>GEO를 직접 연구하는 실무진</h3><p>브랜딩·PR, 글로벌 유통, 소상공인 컨설팅 현장 출신 3인이 GEO·AI Search 칼럼을 연재하며 방법론을 쌓고 있습니다.</p></div>
       </div>
-      <p class="team-lab"><span class="mono">TEAM</span>함께하는 사람들</p>
+    </div>
+  </section>
+
+  <section id="team" data-label="Team">
+    <div class="wrap">
+      <div class="s-head">
+        <span class="kicker"><b>09</b>About · Team</span>
+        <h2>함께하는 사람들</h2>
+      </div>
       <div class="team">
         <article class="person">
           <div class="photo"><img src="img/seo.jpg" alt="서진욱 대표" width="560" height="700" loading="lazy"><span class="badge">CEO</span></div>
@@ -1791,6 +1926,10 @@ document.getElementById('contact-form').addEventListener('submit',async e=>{
   const nav=document.createElement('nav');nav.className='dots';nav.setAttribute('aria-label','페이지 이동');
   secs.forEach(s=>{const a=document.createElement('a');a.href='#'+s.id;a.innerHTML='<span>'+s.dataset.label+'</span><i></i>';nav.appendChild(a)});
   document.body.appendChild(nav);
+  // 한 화면보다 긴 섹션이 있으면 스냅을 풀어 잘리지 않게
+  const hdr=document.querySelector('header.site');
+  const fit=()=>{const vh=innerHeight-(hdr?hdr.offsetHeight:0);document.documentElement.classList.toggle('loose',secs.some(s=>s.offsetHeight>vh+2))};
+  let ft;addEventListener('resize',()=>{clearTimeout(ft);ft=setTimeout(fit,150)});addEventListener('load',fit);fit();
   const links=[...nav.children];
   const show=s=>s.classList.add('in');
   if(!('IntersectionObserver' in window)){secs.forEach(show);return}
