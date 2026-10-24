@@ -1747,7 +1747,7 @@ IND.forEach((x,i)=>{const b=document.createElement('button');b.className='tab';b
 show(0);
 
 // 무료 진단은 외부 진단 페이지(stepupai/ai)에서 진행
-// 상담 문의 → 진단 사이트 상담 신청과 같은 Apps Script → 상담 시트 (유입: homepage로 구분)
+// 상담 문의 → 진단 DB Apps Script(action=homepage) → 구글 시트 '홈페이지 문의' 탭 (진단 퍼널과 분리)
 const HOME_GAS_URL='https://script.google.com/macros/s/AKfycbyPkGUbeGPOqyn6oPTZR6RA2TYJOJEgJ1EpUUHvniZaKvTL25ImquC9boQG5z0Ni-Zl/exec';
 const CONSULT_PAGE='https://rebirth1105-beep.github.io/stepupai/ai/consultation-form.html';
 document.getElementById('contact-form').addEventListener('submit',async e=>{
@@ -1761,9 +1761,7 @@ document.getElementById('contact-form').addEventListener('submit',async e=>{
   const fallback='<a href="'+CONSULT_PAGE+'" target="_blank" rel="noopener">상담 신청 페이지에서 신청하기 ↗</a>';
   if(!HOME_GAS_URL){m.innerHTML='온라인 접수를 연결하는 중입니다. '+fallback;return}
   btn.disabled=true;m.textContent='전송 중입니다…';
-  if(v('c-hp')){form.reset();m.textContent='상담 신청이 접수됐습니다.';btn.disabled=false;return}
-  const msg=(v('c-svc')?'[관심 서비스: '+v('c-svc')+'] ':'')+v('c-msg');
-  const payload=new URLSearchParams({name:v('c-name'),contact:v('c-tel'),email:'',website:'',message:msg,plan:'free',resultType:'',source:'homepage'});
+  const payload=new URLSearchParams({action:'homepage',name:v('c-name'),contact:v('c-tel'),service:v('c-svc'),message:v('c-msg'),agree:'Y',hp:v('c-hp')});
   try{
     await fetch(HOME_GAS_URL,{method:'POST',mode:'no-cors',body:payload});
     form.reset();
