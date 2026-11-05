@@ -272,6 +272,12 @@ $('retry').onclick=()=>{cur=0;ans={};show('s-quiz');render()};
 
 const label=(k,v)=>{const q=Q.find(x=>x.k===k);const o=q.o.find(x=>x[0]===v);return o?o[2]:''};
 
+// 진단 데이터 → 구글시트 「광고 진단」 탭 (진단 완료 시 1줄, 상담 신청 시 같은 줄에 연락처 추가)
+let sid='';
+const newSid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const diagFields=()=>({sid,biz:label('biz',ans.biz),find:label('find',ans.find),goal:label('goal',ans.goal),budget:label('budget',ans.budget),exp:label('exp',ans.exp),land:label('land',ans.land),mix:scoreMix().map(([k,p])=>CH[k].n+' '+p+'%').join(', ')});
+const send=(extra)=>fetch(GAS_URL,{method:'POST',mode:'no-cors',body:new URLSearchParams(Object.assign({action:'ads'},diagFields(),extra))});
+
 function loading(){
   show('s-load');
   const msgs=[`「${label('biz',ans.biz)}」 업종의 고객 동선 확인 중`,`「${label('find',ans.find)}」 찾는 고객에 맞는 매체 고르는 중`,`목표 「${label('goal',ans.goal)}」 기준으로 우선순위 정하는 중`,`월 예산 「${label('budget',ans.budget)}」 배분 계산 중`];
@@ -325,10 +331,8 @@ function result(){
   st.push('4주차: 문의·매출 기준 리포트 → 다음 달 조합 확정');
   $('r-steps').innerHTML=st.map(x=>`<li>${x}</li>`).join('');
   show('s-result');
-}
-
-function summary(){
-  return `[광고 진단] 업종:${label('biz',ans.biz)} / 유입:${label('find',ans.find)} / 목표:${label('goal',ans.goal)} / 예산:${label('budget',ans.budget)} / 경험:${label('exp',ans.exp)} / 랜딩:${label('land',ans.land)} / 추천:${scoreMix().map(([k,p])=>CH[k].n+' '+p+'%').join(', ')}`;
+  sid=newSid();
+  send({stage:'diag'}).catch(()=>{});
 }
 
 $('f').addEventListener('submit',async e=>{
@@ -339,10 +343,8 @@ $('f').addEventListener('submit',async e=>{
   if(!v('f-tel')){m.textContent='회신받으실 연락처를 입력해 주세요.';return}
   if(!$('f-agree').checked){m.textContent='개인정보 수집 및 이용에 동의해 주세요.';return}
   b.disabled=true;m.style.color='var(--muted)';m.textContent='전송 중입니다…';
-  const msg=summary()+(v('f-msg')?'\n[추가 내용] '+v('f-msg'):'');
-  const payload=new URLSearchParams({action:'homepage',name:v('f-name'),contact:v('f-tel'),service:'광고 (파워링크 등)',message:msg,agree:'Y',hp:v('f-hp'),source:'ads-diagnosis'});
   try{
-    await fetch(GAS_URL,{method:'POST',mode:'no-cors',body:payload});
+    await send({stage:'lead',name:v('f-name'),contact:v('f-tel'),memo:v('f-msg'),agree:'Y',hp:v('f-hp')});
     $('cta').innerHTML='<div class="done"><div class="big">✅</div><h3>상담 신청이 접수됐습니다</h3><p style="color:var(--muted);font-size:14px">진단 결과를 확인한 뒤, 영업일 기준 1~2일 안에 연락드립니다.</p></div>';
   }catch(_){
     m.style.color='var(--red)';m.innerHTML='지금은 전송할 수 없습니다. <a href="mailto:hello@stepup-universe.ai.kr">hello@stepup-universe.ai.kr</a> 로 남겨 주세요.';
