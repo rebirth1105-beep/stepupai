@@ -203,6 +203,14 @@ header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;backgrou
 .st:nth-child(4){min-height:240px}.st:nth-child(5){min-height:270px;border-color:var(--line-2)}
 .st:nth-child(6){min-height:300px;border-color:var(--blue);background:linear-gradient(180deg,color-mix(in srgb,var(--blue) 14%,var(--bg-2)),var(--bg-2))}
 .stairs-note{margin-top:14px;font-size:13px;color:var(--mute)}
+/* 서비스 아래 퍼포먼스 한 줄 */
+.svc-plus{margin-top:18px;display:flex;align-items:center;gap:14px 20px;flex-wrap:wrap;padding:18px 24px;border:1px solid var(--line-2);border-radius:16px;background:var(--bg-2);transition:border-color .15s}
+.svc-plus:hover{border-color:var(--blue)}
+.svc-plus .pl{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.1em;color:var(--blue)}
+.svc-plus b{flex:1;min-width:240px;font-size:16px;font-weight:700;color:var(--fg)}
+.svc-plus .ch{font-size:13px;color:var(--mute)}
+.svc-plus .go{font-size:14px;color:var(--blue);font-weight:700}
+.svc-plus:hover .go{color:var(--cyan)}
 /* 퍼포먼스 마케팅 섹션 */
 .pf-grid{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .pf{padding:24px;border:1px solid var(--line-2);border-radius:16px;background:var(--bg-2)}
@@ -1232,6 +1240,7 @@ html.loose main>section{scroll-snap-stop:normal}
           </a>
         </div>
       </div>
+      <a href="#performance">PERFORMANCE</a>
       <a href="#trust">MEDIA</a>
       <a href="#case">CASE</a>
       <a href="#insight">INSIGHT</a>
@@ -1250,7 +1259,7 @@ html.loose main>section{scroll-snap-stop:normal}
     <a class="sub" href="#svc-geo">GEO MARKETING<small>AI 검색에서 발견·추천되도록</small></a>
     <a class="sub" href="#svc-site">WEBSITE<small>공식 출처가 되는 자체 홈페이지</small></a>
     <a class="sub" href="#svc-content">CONTENT · MEDIA &amp; PR<small>기사와 콘텐츠로 만드는 신뢰</small></a>
-    <a class="sub" href="#performance">PERFORMANCE<small>지금 필요한 문의를 만드는 퍼포먼스 마케팅</small></a>
+    <a href="#performance"><span class="k">PERFORMANCE</span><small>지금 필요한 문의를 만드는 퍼포먼스 마케팅</small></a>
     <a href="#trust"><span class="k">MEDIA</span><small>대한청년일보 · 직접 만드는 기사</small></a>
     <a href="#case"><span class="k">CASE</span><small>기사가 AI 추천 근거가 된 실제 사례</small></a>
     <a href="#insight"><span class="k">INSIGHT</span></a>
@@ -1398,6 +1407,12 @@ html.loose main>section{scroll-snap-stop:normal}
           <a class="more" href="#contact">콘텐츠·PR 상담 →</a>
         </article>
       </div>
+      <a class="svc-plus" href="#performance">
+        <span class="pl">+ PERFORMANCE</span>
+        <b>AI 노출이 쌓이는 동안, 지금 필요한 문의는 퍼포먼스 마케팅으로</b>
+        <span class="ch">검색 · 플레이스 · SNS</span>
+        <span class="go">자세히 보기 →</span>
+      </a>
 
     </div>
   </section>
