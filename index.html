@@ -1048,6 +1048,17 @@ a.st:hover .get i{color:var(--cyan)}
 .cs-note b{color:var(--cyan)}
 .cs-copy>p.cs-more{font-size:13.5px;color:var(--mute)}
 .cs-more b{color:var(--dim)}
+.cs2{border-top:0}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:end;padding:26px 26px 20px}
+.ba-col{display:flex;flex-direction:column;justify-content:flex-end;gap:6px;min-width:0}
+.ba-col i{display:block;width:100%;background:color-mix(in srgb,var(--mute) 40%,transparent);border-radius:8px 8px 0 0}
+.ba-col.on i{background:var(--blue);box-shadow:0 0 40px -8px color-mix(in srgb,var(--blue) 70%,transparent)}
+.ba-v{font-family:var(--font-mono);font-size:30px;font-weight:700;color:var(--mute);line-height:1.1}
+.ba-col.on .ba-v{color:var(--cyan)}
+.ba-col b{font-size:14px;color:var(--fg);margin-top:4px}
+.ba-col small{font-size:12px;color:var(--mute)}
+.cs-quote{margin:0;padding:12px 16px;border:1px solid var(--line-2);border-radius:12px;font-size:13.5px;color:var(--dim);line-height:1.65}
+.cs-quote cite{display:block;margin-top:6px;font-style:normal;font-size:11.5px;color:var(--mute)}
 
 /* 신뢰의 근거 섹션: 간결형 */
 #trust .ivs{padding-block:16px;gap:12px}
@@ -1436,7 +1447,7 @@ html.loose main>section{scroll-snap-stop:normal}
 
         <div class="press-stats proof">
           <div class="big"><b class="mono">113,211</b><span>누적 게재 기사</span></div>
-          <div class="pf search"><span class="se-ic"><img class="nv" src="img/naver-wm.svg" alt="NAVER" width="521" height="100"><img class="gg" src="img/google-wm.svg" alt="Google" width="272" height="92"></span><b>네이버 · 구글 검색 노출</b><span>기사가 네이버 뉴스와 구글 검색에 그대로 노출됩니다</span></div>
+          <div class="pf search"><span class="se-ic"><img class="nv" src="img/naver-wm.svg" alt="NAVER" width="521" height="100"><img class="gg" src="img/google-wm.svg" alt="Google" width="272" height="92"></span><b>네이버 · 구글 검색 노출</b><span>기사가 네이버·구글 검색에 그대로 노출됩니다</span></div>
           <div class="pf"><b>AI 인용 확인</b><span>기사가 AI 추천의 근거로 <a href="#case">사례 보기 →</a></span></div>
           <div class="pf"><b>정식 등록 언론사</b><span>인터넷신문 정식 등록 매체</span></div>
         </div>
@@ -1481,7 +1492,7 @@ html.loose main>section{scroll-snap-stop:normal}
           <figcaption>기사 발행 후 구글 AI 모드 실제 답변 재구성 · 현재 답변은 달라질 수 있음 · 인물 이름은 가림</figcaption>
         </figure>
         <div class="cs-copy">
-          <span class="kicker">Case · 실제 사례</span>
+          <span class="kicker">Case 01 · 실제 사례</span>
           <h3>실제로, 기사 한 편이<br>AI의 추천 근거가 됐습니다.</h3>
           <p>구글 AI 모드에 “두바이 부동산 전문가 추천”을 물었습니다. AI는 대한청년일보 인터뷰 기사를 근거로, 그 기사의 주인공을 전문가로 추천했습니다.</p>
           <ol class="cs-flow">
@@ -1491,6 +1502,30 @@ html.loose main>section{scroll-snap-stop:normal}
           </ol>
           <p class="cs-note">추천된 한국인 전문가 3명 중 2명, <b>근거는 언론 인터뷰</b>였습니다.</p>
           <p class="cs-more">AI 답변은 계속 바뀝니다. 그래서 한 번 노출로 끝내지 않고 <b>매달 다시 측정</b>합니다.</p>
+          <a class="btn btn-primary" href="#diagnose">우리 브랜드도 진단받기 <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4-2. CASE 02: 기사 발행 전후 AI 언급률 (노슈니, 본인 동의·활동명) -->
+  <section id="case2" data-label="사례 · 전후">
+    <div class="wrap">
+      <div class="cs cs2">
+        <figure class="cs-ai" aria-label="기사 발행 전후 AI 언급률 비교">
+          <div class="cs-tabs"><b>AI 언급률</b><span>ChatGPT</span><span>Gemini</span><span>Claude</span></div>
+          <div class="ba">
+            <div class="ba-col"><span class="ba-v">11%</span><i style="height:40px"></i><b>기사 발행 전</b><small>27점 · AI가 이름을 모름</small></div>
+            <div class="ba-col on"><span class="ba-v">44%</span><i style="height:160px"></i><b>기사 발행 후</b><small>55점 · AI 3곳 모두 추천</small></div>
+          </div>
+          <figcaption>GEO Real Check 진단 · 질문 6개 × AI 3곳 중 이름이 언급된 비율 · 2026.7.10 / 7.28 측정 · 본인 동의 후 활동명으로 게재</figcaption>
+        </figure>
+        <div class="cs-copy">
+          <span class="kicker">Case 02 · 기사 발행 전과 후</span>
+          <h3>기사가 나가자,<br>AI가 이름을 말하기 시작했습니다.</h3>
+          <p>노션 글로벌 앰배서더 ‘노슈니’. 기사 발행 전에는 ChatGPT·Gemini·Claude 모두 이름을 알지 못했습니다.</p>
+          <p class="cs-note">AI 언급률 <b>11% → 44%</b>. AI는 기사에 적힌 내용을 근거로 추천했습니다.</p>
+          <blockquote class="cs-quote">“노션 컨설팅 분야에서 두각을 나타내는 전문가로는 노슈니 님이 있습니다. … 약 3,000명이 활동하는 노션 교육 커뮤니티 ‘슈크림마을’을 운영하고 있습니다.”<cite>기사 발행 후 ChatGPT 답변 · 출처로 언론 기사 링크 표시</cite></blockquote>
           <a class="btn btn-primary" href="#diagnose">우리 브랜드도 진단받기 <span class="arr">→</span></a>
         </div>
       </div>
